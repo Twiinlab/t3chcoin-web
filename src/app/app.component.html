@@ -12,7 +12,7 @@
           Sign-out
         </button>
         <button *ngIf="!currentUser" id="sign-in" (click)="login()" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-color-text--white">
-          <i class="material-icons">account_circle</i>Sign-in with Google
+          <i class="material-icons">account_circle</i>Sign-in with Twitter
         </button>
       </div>
     </div>
@@ -25,6 +25,7 @@
       <div id="messages-card" class="mdl-card mdl-shadow--2dp mdl-cell mdl-cell--12-col mdl-cell--6-col-tablet mdl-cell--6-col-desktop">
         <div class="mdl-card__supporting-text mdl-color-text--grey-600">
           <div id="messages">
+            <router-outlet></router-outlet>
             <span id="message-filler"></span>
             <div class="message-container" *ngFor="let message of messages | async">
               <div class="spacing">

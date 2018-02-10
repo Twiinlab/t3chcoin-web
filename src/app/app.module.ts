@@ -15,15 +15,21 @@
  */
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { ROUTING } from './app.routing'
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
+
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { MatSnackBarModule } from '@angular/material';
 
 import { AppComponent } from './app.component';
+import { HomeComponent } from './home/home.component';
+import { ProfileComponent } from './profile/profile.component';
+import { NotFoundComponent } from './notfound/notfound.component';
+
 import { StylizePipe } from './stylize.pipe';
 import { environment } from '../environments/environment';
 
@@ -47,6 +53,9 @@ if (!environment.firebase) {
 @NgModule({
   declarations: [
     AppComponent,
+    HomeComponent,
+    ProfileComponent,
+    NotFoundComponent,
     StylizePipe
   ],
   imports: [
@@ -57,7 +66,8 @@ if (!environment.firebase) {
     MatSnackBarModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireDatabaseModule,
-    AngularFireAuthModule
+    AngularFireAuthModule,
+    ROUTING
   ],
   providers: [],
   bootstrap: [AppComponent]
