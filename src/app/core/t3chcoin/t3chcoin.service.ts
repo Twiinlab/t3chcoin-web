@@ -29,6 +29,20 @@ export class T3chcoinService {
       .catch(this.handleError);
   }
 
+  getUser(userId: string): Observable<any> {
+    return this.http
+      .get(`${environment.apiUrl}/user/${userId}`)
+      .map(res => this.extractData(res))
+      .catch(this.handleError);
+  }
+
+  AddUser(userId: string, userName: string, socialId: string): Observable<any> {
+    return this.http
+      .post(`${environment.apiUrl}/user`, { userId, userName, socialId })
+      .map(res => this.extractData(res))
+      .catch(this.handleError);
+  }
+
   // postGreeting(name: string, description: string): Observable<any> {
   //   return this.http
   //     .post(environment.apiUrl, { name, description })

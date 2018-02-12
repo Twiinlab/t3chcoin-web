@@ -5,6 +5,9 @@ import { AngularFireAuth } from 'angularfire2/auth';
 import { MatSnackBar } from '@angular/material';
 import * as firebase from 'firebase';
 
+import { T3chcoinService } from '../core/t3chcoin/t3chcoin.service';
+
+
 const LOADING_IMAGE_URL = 'https://www.google.com/images/spin-32.gif';
 const PROFILE_PLACEHOLDER_IMAGE_URL = '/assets/images/profile_placeholder.png';
 
@@ -21,8 +24,13 @@ export class ProfileComponent {
   profilePicStyles: {};
   topics = '';
   value = '';
+  currenUserProfile: any;
 
-  constructor(public db: AngularFireDatabase, public afAuth: AngularFireAuth, public snackBar: MatSnackBar) {
+  constructor(
+    public db: AngularFireDatabase,
+    public afAuth: AngularFireAuth,
+    public snackBar: MatSnackBar,
+    public t3chcoinService: T3chcoinService) {
     this.user = afAuth.authState;
     this.user.subscribe((user: firebase.User) => {
       console.log(user);
@@ -32,44 +40,24 @@ export class ProfileComponent {
         this.profilePicStyles = {
           'background-image':  `url(${this.currentUser.photoURL})`
         };
-
-        // We load currently existing chat messages.
-        this.messages = this.db.list('/messages', {
-          query: {
-            limitToLast: 12
+        // user.providerData[0].displayName
+        t3chcoinService.getUser(user.providerData[0].uid)
+        .subscribe(myUser => {
+          if (myUser.userName === '') {
+            t3chcoinService.AddUser(
+              user.providerData[0].uid,
+              user.providerData[0].displayName,
+              user.providerData[0].uid)
+              .subscribe(result => {
+                console.log(result);
+              });
+          } else {
+            this.currenUserProfile = myUser;
           }
         });
-        this.messages.subscribe((messages) => {
-          // Calculate list of recently discussed topics
-          const topicsMap = {};
-          const topics = [];
-          let hasEntities = false;
-          messages.forEach((message) => {
-            if (message.entities) {
-              for (const entity of message.entities) {
-                if (!topicsMap.hasOwnProperty(entity.name)) {
-                  topicsMap[entity.name] = 0
-                }
-                topicsMap[entity.name] += entity.salience;
-                hasEntities = true;
-              }
-            }
-          });
-          if (hasEntities) {
-            for (let name in topicsMap) {
-              topics.push({ name, score: topicsMap[name] });
-            }
-            topics.sort((a, b) => b.score - a.score);
-            this.topics = topics.map((topic) => topic.name).join(', ');
-          }
 
-          // Make sure new message scroll into view
-          setTimeout(() => {
-            const messageList = document.getElementById('messages');
-            messageList.scrollTop = messageList.scrollHeight;
-            document.getElementById('message').focus();
-          }, 500);
-        });
+
+
 
       } else { // User is signed out!
         this.profilePicStyles = {
@@ -111,32 +99,9 @@ export class ProfileComponent {
   };
 
   // TODO: Refactor into text message form component
-  saveMessage(event: any, el: HTMLInputElement) {
-    event.preventDefault();
-
-    if (this.value && this.checkSignedInWithMessage()) {
-      // Add a new message entry to the Firebase Database.
-      const messages = this.db.list('/messages');
-      messages.push({
-        name: this.currentUser.displayName,
-        text: this.value,
-        photoUrl: this.currentUser.photoURL || PROFILE_PLACEHOLDER_IMAGE_URL
-      }).then(() => {
-        // Clear message text field and SEND button state.
-        el.value = '';
-      }).catch((err) => {
-        this.snackBar.open('Error writing new message to Firebase Database.', null, {
-          duration: 5000
-        });
-        console.error(err);
-      });
-    }
-  }
+  saveMessage(event: any, el: HTMLInputElement) { }
 
   // TODO: Refactor into image message form component
-  onImageClick(event: any) {
-    event.preventDefault();
-    document.getElementById('mediaCapture').click();
-  }
+  onImageClick(event: any) { }
 
 }
