@@ -1,6 +1,6 @@
 {
-  "name": "Friendly Chat",
-  "short_name": "Friendly Chat",
+  "name": "T3chCoin",
+  "short_name": "T3chCoin",
   "start_url": "/index.html",
   "display": "standalone",
   "orientation": "portrait"

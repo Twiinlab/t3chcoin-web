@@ -20,6 +20,7 @@
 
 export const environment = {
   production: false,
+  apiUrl: 'http://127.0.0.1:3000/api',
   firebase: {
     // ***********************************************************************************************************************
     // * TODO(DEVELOPER): Update values according to: Firebase Console > Overview > Add Firebase to your web app. *

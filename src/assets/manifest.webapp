@@ -1,8 +1,8 @@
 {
   "version": "1.0.0",
-  "name": "Friendly Chat",
+  "name": "T3chCoin",
   "launch_path": "/index.html",
-  "description": "Chat with friends using Firebase 2.0",
+  "description": "T3chCoin",
   "developer": {
     "name": "Google inc.",
     "url": "https://firebase.google.com"
@@ -15,8 +15,8 @@
   },
   "locales": {
     "en": {
-      "name": "Friendly Chat",
-      "description": "Chat with friends using Firebase 2.0"
+      "name": "T3chCoin",
+      "description": "T3chCoin"
     }
   }
 }

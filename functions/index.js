@@ -33,7 +33,7 @@ exports.addWelcomeMessages = functions.auth.user().onCreate((event) => {
   const fullName = user.displayName || 'Anonymous';
 
   // Saves the new welcome message into the database
-  // which then displays it in the FriendlyChat clients.
+  // which then displays it in the T3chCoin clients.
   return admin.database().ref('messages').push({
     name: 'Firebase Bot',
     photoUrl: '/assets/images/firebase-logo.png', // Firebase logo
