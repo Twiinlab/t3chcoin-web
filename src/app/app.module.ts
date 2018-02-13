@@ -18,6 +18,8 @@ import { NgModule } from '@angular/core';
 import { ROUTING } from './app.routing';
 import { CoreModule } from './core/core.module';
 
+import {MatCardModule} from '@angular/material/card';
+
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { AngularFireAuthModule } from 'angularfire2/auth';
@@ -56,6 +58,7 @@ if (!environment.firebase) {
   imports: [
     BrowserModule,
     CoreModule,
+    MatCardModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireDatabaseModule,
     AngularFireAuthModule,

@@ -22,7 +22,7 @@ export class HomeComponent implements OnInit {
       this.messages = socials.map(item => {
         return {
           photoUrl: PROFILE_PLACEHOLDER_IMAGE_URL,
-          socialId: '#UserName',
+          socialId: item.socialId || '#UserName',
           totalAll: item.totalAll,
           totalTwit: item.totalTwit,
           totalTwitLike: item.totalTwit,
