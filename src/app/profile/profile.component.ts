@@ -25,6 +25,14 @@ export class ProfileComponent {
   topics = '';
   value = '';
   currenUserProfile: any;
+  cards = [
+    {src: 'assets/cardimages/31e704b1-e61e-4d30-a8ba-97f1f74ef630.jpg', alt: 'Photo1 of a Shiba Inu'},
+    {src: 'assets/cardimages/193f5929-cab0-4d54-b4f8-eddc90be0328.jpg', alt: 'Photo2 of a Shiba Inu'},
+    {src: 'assets/cardimages/29041744-100f-469e-bb27-79e6a00455cf.jpg', alt: 'Photo3 of a Shiba Inu'},
+    {src: 'assets/cardimages/da525caa-2ca4-4371-8609-8c1677551c26.jpg', alt: 'Photo4 of a Shiba Inu'},
+    {src: 'assets/cardimages/e97f9ff7-0d33-4186-933e-43cf1faf3350.jpg', alt: 'Photo5 of a Shiba Inu'},
+    {src: 'assets/cardimages/e39330f1-708a-4959-a395-7598f1bf1cef.jpg', alt: 'Photo6 of a Shiba Inu'}
+  ];
 
   constructor(
     public db: AngularFireDatabase,
@@ -97,11 +105,5 @@ export class ProfileComponent {
 
     return false;
   };
-
-  // TODO: Refactor into text message form component
-  saveMessage(event: any, el: HTMLInputElement) { }
-
-  // TODO: Refactor into image message form component
-  onImageClick(event: any) { }
 
 }

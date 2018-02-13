@@ -25,59 +25,35 @@
       <main class="mdl-layout__content mdl-color--grey-100">
         <div id="messages-card-container" class="mdl-cell mdl-cell--12-col mdl-grid">
           <!-- Messages container -->
-          <div id="messages-card" class="mdl-card mdl-shadow--2dp mdl-cell mdl-cell--12-col mdl-cell--6-col-tablet mdl-cell--6-col-desktop">
-            <mat-card class="example-card">
-              <mat-card-header>
-                <div mat-card-avatar class="example-header-image"></div>
-                <mat-card-title>Shiba Inu</mat-card-title>
-                <mat-card-subtitle>Dog Breed</mat-card-subtitle>
-              </mat-card-header>
-              <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">
-              <mat-card-content>
-                <p>
-                  The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan.
-                  A small, agile dog that copes very well with mountainous terrain, the Shiba Inu was originally
-                  bred for hunting.
-                </p>
-              </mat-card-content>
-              <mat-card-actions>
-                <button mat-button>LIKE</button>
-                <button mat-button>SHARE</button>
-              </mat-card-actions>
-            </mat-card>
-            <div class="mdl-card__supporting-text mdl-color-text--grey-600">
-              <div id="messages">
-                <span id="message-filler"></span>
-                <div class="message-container" *ngFor="let message of messages | async">
-                  <div class="spacing">
-                    <div class="pic" [style.background-image]="'url(' + message.photoUrl + ')'"></div>
-                  </div>
-                  <div class="message">
-                    <span *ngIf="message.text" [style]="message.sentiment">{{ message.text }}</span>
-                    <img *ngIf="message.imageUrl" [src]="message.imageUrl + (message.moderated ? '&amp;moderated=1' : '')">
-                  </div>
-                  <div class="name">{{ message.name }}</div>
-                </div>
-              </div>
-              <div *ngIf="topics"><em>Recent topics: {{ topics }}</em></div>
-              <form id="message-form" (submit)="saveMessage($event, box)">
-                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                  <input #box class="mdl-textfield__input" type="text" id="message"
-                    (keyup)="update(box.value)" (blur)="update(box.value)"
-                    placeholder="Message...">
-                </div>
-                <button id="submit" [disabled]="!value" type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">
-                  Send
-                </button>
-              </form>
-              <form id="image-form" action="#">
-                <input id="mediaCapture" type="file" accept="image/*,capture=camera" (change)="saveImageMessage($event)">
-                <button id="submitImage" title="Add an image" (click)="onImageClick($event)"
-                  class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-color--amber-400 mdl-color-text--white">
-                  <i class="material-icons">image</i>
-                </button>
-              </form>
-            </div>    
+          <div class="mdl-cell mdl-cell--12-col mdl-cell--12-col-desktop">
+            <mat-grid-list cols="2">
+              <mat-grid-tile>
+                  <mat-card class="example-card">
+                      <!-- <mat-card-header>
+                        <div mat-card-avatar class="example-header-image"></div>
+                        <mat-card-title>Shiba Inu</mat-card-title>
+                        <mat-card-subtitle>Dog Breed</mat-card-subtitle>
+                      </mat-card-header> -->
+                      <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg">
+                    </mat-card>
+              </mat-grid-tile>
+              <mat-grid-tile>
+                  <mat-list class="profile-container" *ngIf="currenUserProfile">
+                      <mat-list-item> UserId: {{currenUserProfile.userId}} </mat-list-item>
+                      <mat-list-item> Username: {{currenUserProfile.userName}} </mat-list-item>
+                      <mat-list-item> Balance: {{currenUserProfile.balance}} </mat-list-item>
+                  </mat-list>
+              </mat-grid-tile>
+            </mat-grid-list>
+          </div>
+          <div id="messages-card" class="mdl-card mdl-shadow--2dp mdl-cell mdl-cell--12-col mdl-cell--12-col-desktop">
+            <mat-grid-list cols="6" >
+              <mat-grid-tile *ngFor="let card of cards">
+                <mat-card class="example-card" >
+                  <img mat-card-image src="{{card.src}}" alt="{{card.alt}}" >
+                </mat-card>
+              </mat-grid-tile>
+            </mat-grid-list>  
           </div>
         </div>
       </main>

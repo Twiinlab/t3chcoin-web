@@ -19,6 +19,7 @@ import { ROUTING } from './app.routing';
 import { CoreModule } from './core/core.module';
 
 import {MatCardModule} from '@angular/material/card';
+import {MatGridListModule} from '@angular/material/grid-list';
 
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
@@ -59,6 +60,7 @@ if (!environment.firebase) {
     BrowserModule,
     CoreModule,
     MatCardModule,
+    MatGridListModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireDatabaseModule,
     AngularFireAuthModule,
