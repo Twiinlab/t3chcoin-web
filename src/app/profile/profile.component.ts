@@ -25,6 +25,7 @@ export class ProfileComponent {
   topics = '';
   value = '';
   currenUserProfile: any;
+  currenSocialProfile: any;
   cards = [
     {src: 'assets/cardimages/31e704b1-e61e-4d30-a8ba-97f1f74ef630.jpg', alt: 'Photo1 of a Shiba Inu'},
     {src: 'assets/cardimages/193f5929-cab0-4d54-b4f8-eddc90be0328.jpg', alt: 'Photo2 of a Shiba Inu'},
@@ -42,8 +43,8 @@ export class ProfileComponent {
     this.user = afAuth.authState;
     this.user.subscribe((user: firebase.User) => {
       console.log(user);
+      const self = this;
       this.currentUser = user;
-
       if (user) { // User is signed in!
         this.profilePicStyles = {
           'background-image':  `url(${this.currentUser.photoURL})`
@@ -57,10 +58,12 @@ export class ProfileComponent {
               user.providerData[0].displayName,
               user.providerData[0].uid)
               .subscribe(result => {
-                console.log(result);
+                self.getUserProfile(this.currentUser.providerData[0].uid);
+                self.getSocialProfile(this.currentUser.providerData[0].uid);
               });
           } else {
-            this.currenUserProfile = myUser;
+            self.fillUserProfile(myUser);
+            self.getSocialProfile(myUser.userId);
           }
         });
 
@@ -74,6 +77,30 @@ export class ProfileComponent {
         this.topics = '';
       }
     });
+  }
+
+  getUserProfile(userId) {
+    const self = this;
+    this.t3chcoinService.getUser(userId)
+    .subscribe(myUser => {
+      self.fillUserProfile(myUser);
+    });
+  }
+
+  getSocialProfile(userId) {
+    const self = this;
+    this.t3chcoinService.getSocial(userId)
+    .subscribe(mySocial => {
+      self.fillSocialProfile(mySocial);
+    });
+  }
+
+  fillUserProfile(userProfile) {
+    this.currenUserProfile = userProfile;
+  }
+
+  fillSocialProfile(socialProfile) {
+    this.currenSocialProfile = socialProfile;
   }
 
   login() {

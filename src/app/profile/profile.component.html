@@ -25,36 +25,77 @@
       <main class="mdl-layout__content mdl-color--grey-100">
         <div id="messages-card-container" class="mdl-cell mdl-cell--12-col mdl-grid">
           <!-- Messages container -->
-          <div class="mdl-cell mdl-cell--12-col mdl-cell--12-col-desktop">
-            <mat-grid-list cols="2">
-              <mat-grid-tile>
-                  <mat-card class="example-card">
-                      <!-- <mat-card-header>
-                        <div mat-card-avatar class="example-header-image"></div>
-                        <mat-card-title>Shiba Inu</mat-card-title>
-                        <mat-card-subtitle>Dog Breed</mat-card-subtitle>
-                      </mat-card-header> -->
-                      <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg">
-                    </mat-card>
-              </mat-grid-tile>
-              <mat-grid-tile>
-                  <mat-list class="profile-container" *ngIf="currenUserProfile">
-                      <mat-list-item> UserId: {{currenUserProfile.userId}} </mat-list-item>
-                      <mat-list-item> Username: {{currenUserProfile.userName}} </mat-list-item>
-                      <mat-list-item> Balance: {{currenUserProfile.balance}} </mat-list-item>
-                  </mat-list>
-              </mat-grid-tile>
-            </mat-grid-list>
-          </div>
-          <div id="messages-card" class="mdl-card mdl-shadow--2dp mdl-cell mdl-cell--12-col mdl-cell--12-col-desktop">
-            <mat-grid-list cols="6" >
-              <mat-grid-tile *ngFor="let card of cards">
-                <mat-card class="example-card" >
-                  <img mat-card-image src="{{card.src}}" alt="{{card.alt}}" >
+          <div fxLayout="row">
+              <div fxFlex="50" fxLayout="column">
+                <mat-card class="example-card"  >
+                  <!-- <mat-card-header>
+                    <div mat-card-avatar class="example-header-image"></div>
+                    <mat-card-title>Shiba Inu</mat-card-title>
+                    <mat-card-subtitle>Dog Breed</mat-card-subtitle>
+                  </mat-card-header> -->
+                  <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg">
                 </mat-card>
-              </mat-grid-tile>
-            </mat-grid-list>  
+              </div>
+              <div fxLayout="column">
+                <mat-list class="profile-container">                
+                <!-- <div class="profile-container" *ngIf="currenUserProfile">
+                    <mat-list-item> UserId: {{currenUserProfile.userId}} </mat-list-item>
+                    <mat-list-item> Username: {{currenUserProfile.userName}} </mat-list-item>
+                    <mat-list-item> Balance: {{currenUserProfile.balance}} </mat-list-item> -->
+                    <div class="profile-container" *ngIf="currenUserProfile">
+                      {{currenUserProfile | json}}
+                    </div>
+                    <div class="profile-container" *ngIf="currenSocialProfile">
+                      {{currenSocialProfile | json}}
+                    </div>
+                    <mat-list-item> Tokens: 10</mat-list-item>                    
+                    <mat-list-item> Socials: </mat-list-item>
+                    <mat-list-item class="button-row">
+                        <span style="font-size: 29px; padding-top: 20px; padding-left:40px">20 </span>
+                        <button mat-icon-button style="background: none">
+                          <mat-icon aria-label="Example icon-button with a heart icon">check</mat-icon>
+                        </button>
+                        <span style="font-size: 29px; padding-top: 20px; padding-left:40px">10 </span>
+                        <button mat-icon-button style="background: none">
+                          <mat-icon aria-label="Example icon-button with a heart icon">autorenew</mat-icon>
+                        </button>
+                        <span style="font-size: 29px;padding-top: 20px; padding-left:40px">5 </span>
+                        <button mat-icon-button style="color: #f44336; background: none">
+                          <mat-icon aria-label="Example icon-button with a heart icon">favorite</mat-icon>
+                        </button>
+                    </mat-list-item>
+                </mat-list>
+              </div>
           </div>
+          <mat-card class="messages-card mdl-card mdl-shadow--2dp mdl-cell mdl-cell--12-col mdl-cell--12-col-desktop">
+              <h4>My items</h4>
+              <div class="items-container" *ngFor="let card of cards let i = index">
+                <mat-card >
+                  <mat-card-header>
+                    <div mat-card-avatar class="example-header-image"></div>
+                    <mat-card-title>{{i}} tokens</mat-card-title>
+                  </mat-card-header>
+                  <img mat-card-image src="{{card.src}}" alt="{{card.alt}}" >
+                  <mat-card-actions>
+                    <button mat-raised-button style="color:white; background:#0288d1">USE</button>
+                  </mat-card-actions>
+                </mat-card>
+              </div>
+              <mat-divider style="color: gray;" ></mat-divider>
+              <h4>Items Market</h4>              
+              <div class="items-container" *ngFor="let card of cards let i = index">
+                <mat-card >
+                  <mat-card-header>
+                    <div mat-card-avatar class="example-header-image"></div>
+                    <mat-card-title>{{i}} tokens</mat-card-title>
+                  </mat-card-header>
+                  <img mat-card-image src="{{card.src}}" alt="{{card.alt}}" >
+                  <mat-card-actions>
+                    <button mat-raised-button style="color:white; background:#0288d1">BUY</button>
+                  </mat-card-actions>
+                </mat-card>
+              </div>
+          </mat-card>
         </div>
       </main>
     </div>
