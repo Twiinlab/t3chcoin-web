@@ -26,6 +26,7 @@ export class ProfileComponent {
   value = '';
   currenUserProfile: any;
   currenSocialProfile: any;
+  itemsCatalog: any;
   cards = [
     {src: 'assets/cardimages/31e704b1-e61e-4d30-a8ba-97f1f74ef630.jpg', alt: 'Photo1 of a Shiba Inu'},
     {src: 'assets/cardimages/193f5929-cab0-4d54-b4f8-eddc90be0328.jpg', alt: 'Photo2 of a Shiba Inu'},
@@ -41,6 +42,22 @@ export class ProfileComponent {
     public snackBar: MatSnackBar,
     public t3chcoinService: T3chcoinService) {
     this.user = afAuth.authState;
+    this.userListener();
+    this.initCatalog();
+  }
+
+  initCatalog() {
+    const self = this;
+    self.t3chcoinService.getItemsCatalog()
+        .subscribe(catalog => {
+          self.itemsCatalog = catalog.map(item => {
+            item.src = self.cards[item.itemId % self.cards.length].src;
+            return item;
+          });
+        });
+  }
+
+  userListener() {
     this.user.subscribe((user: firebase.User) => {
       console.log(user);
       const self = this;
@@ -50,32 +67,58 @@ export class ProfileComponent {
           'background-image':  `url(${this.currentUser.photoURL})`
         };
         // user.providerData[0].displayName
-        t3chcoinService.getUser(user.providerData[0].uid)
+        self.t3chcoinService.getUser(user.providerData[0].uid)
         .subscribe(myUser => {
           if (myUser.userName === '') {
-            t3chcoinService.AddUser(
-              user.providerData[0].uid,
-              user.providerData[0].displayName,
-              user.providerData[0].uid)
-              .subscribe(result => {
-                self.getUserProfile(this.currentUser.providerData[0].uid);
-                self.getSocialProfile(this.currentUser.providerData[0].uid);
-              });
+            self.addUser(self.currentUser.providerData[0]);
           } else {
             self.fillUserProfile(myUser);
             self.getSocialProfile(myUser.userId);
           }
         });
-
-
-
-
       } else { // User is signed out!
         this.profilePicStyles = {
           'background-image':  PROFILE_PLACEHOLDER_IMAGE_URL
         };
         this.topics = '';
       }
+    });
+  }
+
+  addUser(user) {
+    const self = this;
+    this.t3chcoinService.addUser(
+      user.uid,
+      user.displayName,
+      user.uid)
+      .subscribe(result => {
+        self.getUserProfile(user.uid);
+        self.getSocialProfile(user.uid);
+      });
+  }
+
+  buyItem(item) {
+    const self = this;
+    this.t3chcoinService.buyItem(this.currenUserProfile.userId, item.itemId)
+    .subscribe(result => {
+      self.getUserProfile(this.currenUserProfile.userId);
+    });
+  }
+
+  changeSelectedItem(item) {
+    this.currenUserProfile.selectedItem = item.itemId;
+    this.updateSelectedItem();
+  }
+
+  updateSelectedItem() {
+    const self = this;
+    this.t3chcoinService.updateUser(
+      self.currenUserProfile.userId,
+      self.currenUserProfile.userName,
+      self.currenUserProfile.avatar,
+      self.currenUserProfile.selectedItem)
+    .subscribe(result => {
+      self.getUserProfile(this.currenUserProfile.userId);
     });
   }
 
@@ -101,6 +144,15 @@ export class ProfileComponent {
 
   fillSocialProfile(socialProfile) {
     this.currenSocialProfile = socialProfile;
+  }
+
+  getSrcImage(selectedItem) {
+    const selected = this.itemsCatalog.filter(item => item.itemId === selectedItem);
+    return (selected.length > 0 ? selected[0].src : 'https://material.angular.io/assets/img/examples/shiba2.jpg');
+  }
+
+  checkContainsItem(itemId) {
+    return this.currenUserProfile && (this.currenUserProfile.items.indexOf(itemId) === -1);
   }
 
   login() {

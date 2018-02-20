@@ -227,3 +227,22 @@
     align-items: center;
     justify-content: space-around;
   }
+
+  .item-button {
+    color:white; 
+    background:#0288d1;
+  }
+
+  .image-disable {
+    opacity: 0.2;
+  }
+
+  .social-button {
+    padding: 10px 10px 10px 30px;
+    margin: 0 10px;
+  }
+
+  .profile-icon {
+    padding: 5px;
+  }
+    

@@ -26,72 +26,86 @@
         <div id="messages-card-container" class="mdl-cell mdl-cell--12-col mdl-grid">
           <!-- Messages container -->
           <div fxLayout="row">
-              <div fxFlex="50" fxLayout="column">
+              <!-- <div fxFlex="50" fxLayout="column">
                 <mat-card class="example-card"  >
-                  <!-- <mat-card-header>
+                  <mat-card-header>
                     <div mat-card-avatar class="example-header-image"></div>
                     <mat-card-title>Shiba Inu</mat-card-title>
                     <mat-card-subtitle>Dog Breed</mat-card-subtitle>
-                  </mat-card-header> -->
+                  </mat-card-header>
                   <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg">
                 </mat-card>
+              </div> -->
+              <div fxFlex="30" style="padding:30px;" fxLayout="column">
+                <img mat-card-image *ngIf="currenUserProfile === undefined" [src]="'https://material.angular.io/assets/img/examples/shiba2.jpg'">
+                <img mat-card-image *ngIf="currenUserProfile" [src]="getSrcImage(currenUserProfile.selectedItem)">                
               </div>
-              <div fxLayout="column">
+              
+
+              <div fxFlex="70" fxLayout="column">
                 <mat-list class="profile-container">                
-                <!-- <div class="profile-container" *ngIf="currenUserProfile">
-                    <mat-list-item> UserId: {{currenUserProfile.userId}} </mat-list-item>
-                    <mat-list-item> Username: {{currenUserProfile.userName}} </mat-list-item>
-                    <mat-list-item> Balance: {{currenUserProfile.balance}} </mat-list-item> -->
-                    <div class="profile-container" *ngIf="currenUserProfile">
+                    <!-- <div class="profile-container" *ngIf="currenUserProfile">
                       {{currenUserProfile | json}}
                     </div>
                     <div class="profile-container" *ngIf="currenSocialProfile">
                       {{currenSocialProfile | json}}
-                    </div>
-                    <mat-list-item> Tokens: 10</mat-list-item>                    
-                    <mat-list-item> Socials: </mat-list-item>
-                    <mat-list-item class="button-row">
-                        <span style="font-size: 29px; padding-top: 20px; padding-left:40px">20 </span>
-                        <button mat-icon-button style="background: none">
-                          <mat-icon aria-label="Example icon-button with a heart icon">check</mat-icon>
+                    </div> -->
+                    <div fxLayout="row" *ngIf="currenUserProfile">
+                        <div fxFlex="70">
+                          <div> 
+                              <h5>Profile</h5> 
+                              <b>Name:</b> <span>{{currenUserProfile.userName}}</span>
+                          </div>
+                          <div fxLayout="row">
+                            <div fxFlex="50">
+                                <h5>Avatar</h5> 
+                                <i class="fa fa-gamepad fa-2x profile-icon"></i>     
+                                <i class="fa fa-camera-retro fa-2x profile-icon"></i>
+                                <i class="fa fa-dribbble fa-2x profile-icon"></i>
+                                <i class="fa fa-flask fa-2x profile-icon"></i>
+                            </div>
+                            <div fxFlex="50">
+                                <h5>Sex</h5> 
+                                <i class="fa fa-male fa-2x profile-icon"></i>
+                                <i class="fa fa-female fa-2x profile-icon"></i>   
+                            </div>
+                          </div>  
+                        </div>
+                        <div fxFlex="30"> 
+                            <h5>Tokens</h5> 
+                            <span>{{currenUserProfile.balance}}</span>
+                        </div>                          
+                      </div>                    
+                    <h5>Socials Interactions:</h5> 
+                    <mat-list-item *ngIf="currenSocialProfile">
+                        <button class="social-button" mat-raised-button>
+                          <i class="fa fa-twitter fa-3x"></i>
+                          <span style="font-size: 28px; padding: 20px">{{currenSocialProfile.totalTwit || 0}}</span>
                         </button>
-                        <span style="font-size: 29px; padding-top: 20px; padding-left:40px">10 </span>
-                        <button mat-icon-button style="background: none">
-                          <mat-icon aria-label="Example icon-button with a heart icon">autorenew</mat-icon>
+                        <button class="social-button" mat-raised-button>
+                          <i class="fa fa-retweet fa-3x"></i>
+                          <span style="font-size: 28px; padding: 20px">{{currenSocialProfile.totalTwitLike || 0}}</span>
                         </button>
-                        <span style="font-size: 29px;padding-top: 20px; padding-left:40px">5 </span>
-                        <button mat-icon-button style="color: #f44336; background: none">
-                          <mat-icon aria-label="Example icon-button with a heart icon">favorite</mat-icon>
+                        <button class="social-button" mat-raised-button>
+                            <i class="fa fa-heart fa-3x" style="color: #f44336;"></i>
+                            <span style="font-size: 28px; padding: 20px">{{currenSocialProfile.totalTwitRetweet || 0}}</span>
                         </button>
                     </mat-list-item>
                 </mat-list>
               </div>
           </div>
           <mat-card class="messages-card mdl-card mdl-shadow--2dp mdl-cell mdl-cell--12-col mdl-cell--12-col-desktop">
-              <h4>My items</h4>
-              <div class="items-container" *ngFor="let card of cards let i = index">
+              <h4>Collection Market</h4>              
+              <div class="items-container" *ngFor="let item of itemsCatalog let i = index">
                 <mat-card >
                   <mat-card-header>
                     <div mat-card-avatar class="example-header-image"></div>
-                    <mat-card-title>{{i}} tokens</mat-card-title>
+                    <mat-card-title>{{item.price}} tokens</mat-card-title>
                   </mat-card-header>
-                  <img mat-card-image src="{{card.src}}" alt="{{card.alt}}" >
-                  <mat-card-actions>
-                    <button mat-raised-button style="color:white; background:#0288d1">USE</button>
-                  </mat-card-actions>
-                </mat-card>
-              </div>
-              <mat-divider style="color: gray;" ></mat-divider>
-              <h4>Items Market</h4>              
-              <div class="items-container" *ngFor="let card of cards let i = index">
-                <mat-card >
-                  <mat-card-header>
-                    <div mat-card-avatar class="example-header-image"></div>
-                    <mat-card-title>{{i}} tokens</mat-card-title>
-                  </mat-card-header>
-                  <img mat-card-image src="{{card.src}}" alt="{{card.alt}}" >
-                  <mat-card-actions>
-                    <button mat-raised-button style="color:white; background:#0288d1">BUY</button>
+                  <img mat-card-image [class.image-disable]="checkContainsItem(item.itemId)" src="{{item.src}}">
+                  <mat-card-actions *ngIf="currenUserProfile">
+                    <button mat-raised-button class="item-button" *ngIf="(currenUserProfile.items.indexOf(item.itemId) === -1)" (click)="buyItem(item)">BUY ITEM</button>
+                    <button  mat-raised-button class="item-button item-button-buy" *ngIf="(currenUserProfile.items.indexOf(item.itemId) > -1)" (click)="changeSelectedItem(item)">USE STICKER</button>
                   </mat-card-actions>
                 </mat-card>
               </div>

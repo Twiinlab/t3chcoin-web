@@ -43,28 +43,40 @@ export class T3chcoinService {
       .catch(this.handleError);
   }
 
-  AddUser(userId: string, userName: string, socialId: string): Observable<any> {
+  addUser(userId: string, userName: string, socialId: string): Observable<any> {
     return this.http
       .post(`${environment.apiUrl}/user`, { userId, userName, socialId })
       .map(res => this.extractData(res))
       .catch(this.handleError);
   }
 
-  // postGreeting(name: string, description: string): Observable<any> {
-  //   return this.http
-  //     .post(environment.apiUrl, { name, description })
-  //     .delay(500)
-  //     .map(res => this.extractData(res))
-  //     .catch(this.handleError);
-  // }
+  updateUser(userId: string, username: string, avatar: string, selecteditem: string): Observable<any> {
+    return this.http
+      .put(`${environment.apiUrl}/user/${userId}`, { username, avatar, selecteditem: this.stringToBytes32(selecteditem) })
+      .map(res => this.extractData(res))
+      .catch(this.handleError);
+  }
 
-  // deleteGreeting(name: string): Observable<any> {
-  //   return this.http
-  //     .delete(`${environment.apiUrl}/${name}`)
-  //     .delay(500)
-  //     .map(res => this.extractData(res))
-  //     .catch(this.handleError);
-  // }
+  buyItem(userId: string, itemId: string): Observable<any> {
+    return this.http
+      .put(`${environment.apiUrl}/user/${userId}/buy/${this.stringToBytes32(itemId)}`, {})
+      .map(res => this.extractData(res))
+      .catch(this.handleError);
+  }
+
+
+  getItemsCatalog(): Observable<any> {
+    return this.http
+      .get(`${environment.apiUrl}/catalog/`)
+      .map(res => this.extractData(res))
+      .catch(this.handleError);
+  }
+
+  stringToBytes32(text) {
+    let result = String(text);
+    while (result.length < 64) { result = '0' + result; }
+    return '0x' + result;
+}
 
   private extractData(res: Response) {
     if (res.status < 200 || res.status >= 300) {
