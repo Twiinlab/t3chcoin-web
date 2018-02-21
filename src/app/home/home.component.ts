@@ -11,11 +11,11 @@ const PROFILE_PLACEHOLDER_IMAGE_URL = '/assets/images/profile_placeholder.png';
 export class HomeComponent implements OnInit {
 
   messages: any;
+  tableColumns = ['photoUrl', 'socialId', 'totalAll', 'totalTwit', 'totalTwitLike', 'totalTwitRetweet'];
 
   constructor(public t3chcoinService: T3chcoinService) { }
 
   ngOnInit() {
-
     this.t3chcoinService
     .getTopSocials()
     .subscribe(socials => {
@@ -28,7 +28,7 @@ export class HomeComponent implements OnInit {
           totalTwitLike: item.totalTwit,
           totalTwitRetweet: item.totalTwitRetweet
         }
-      })
+      });
     });
 
   }

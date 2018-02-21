@@ -2,22 +2,25 @@
       <!-- Header section containing logo -->
       <header class="mdl-layout__header mdl-color-text--white mdl-color--light-blue-700">
         <div class="mdl-cell mdl-cell--12-col mdl-cell--12-col-tablet mdl-grid">
-          <div class="mdl-layout__header-row mdl-cell mdl-cell--12-col mdl-cell--12-col-tablet mdl-cell--12-col-desktop">
-            <h3><i class="material-icons">ic_videogame_asset</i> T3chCoin</h3>
-            <button routerLink="/" routerLinkActive="active" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-color-text--white option-menu">
-            Hall of fame
-            </button>
-          </div>
-
-          <div id="user-container">
-            <div *ngIf="currentUser" id="user-pic" [ngStyle]="profilePicStyles"></div>
-            <div *ngIf="currentUser" id="user-name">{{ (user | async)?.displayName }}</div>
-            <button *ngIf="currentUser" id="sign-out" (click)="logout()" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-color-text--white">
-              Sign-out
-            </button>
-            <button *ngIf="!currentUser" id="sign-in" (click)="login()" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-color-text--white">
-              <i class="material-icons">account_circle</i>Sign-in with Twitter
-            </button>
+          <div class="top-header" fxLayout="row">
+            <div fxFlex="50" fxLayout="row" fxLayoutAlign="start center">
+              <i class="fa fa-btc fa-3x"></i>
+              <h3 fxFlex="30">T3chCoin</h3>
+              <div fxFlex="20"></div>
+              <button fxFlex="40" mat-button routerLink="/" routerLinkActive="active">
+                HALL OF FAME
+              </button>
+            </div>
+            <div fxFlex="50" fxLayoutAlign="end center">
+              <div *ngIf="currentUser" class="user-pic" [ngStyle]="profilePicStyles"></div>
+              <div *ngIf="currentUser" class="user-name">{{ (user | async)?.displayName }}</div>
+              <button *ngIf="currentUser" (click)="logout()" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-color-text--white">
+                Sign-out
+              </button>
+              <button *ngIf="!currentUser" (click)="login()" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-color-text--white">
+                <i class="material-icons">account_circle</i>Sign-in with Twitter
+              </button>
+            </div>
           </div>
         </div>
       </header>
@@ -58,14 +61,14 @@
                           </div>
                           <div fxLayout="row">
                             <div fxFlex="50">
-                                <h5>Avatar</h5> 
+                                <h5>Hobbies</h5> 
                                 <i class="fa fa-gamepad fa-2x profile-icon"></i>     
                                 <i class="fa fa-camera-retro fa-2x profile-icon"></i>
                                 <i class="fa fa-dribbble fa-2x profile-icon"></i>
                                 <i class="fa fa-flask fa-2x profile-icon"></i>
                             </div>
                             <div fxFlex="50">
-                                <h5>Sex</h5> 
+                                <h5>Avatar</h5>
                                 <i class="fa fa-male fa-2x profile-icon"></i>
                                 <i class="fa fa-female fa-2x profile-icon"></i>   
                             </div>
