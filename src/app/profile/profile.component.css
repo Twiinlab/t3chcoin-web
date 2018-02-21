@@ -238,6 +238,9 @@
   }
 
   .profile-icon {
-    padding: 5px;
+    color: black;
   }
-    
+  
+  .mat-button-toggle-checked {
+    background-color: #0288d1;
+  }

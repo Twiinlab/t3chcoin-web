@@ -3,11 +3,6 @@ main, .messages-card {
   padding-bottom: 0;
 }
 
-.messages-card-container {
-  height: 100%;
-  padding-bottom: 0;
-}
-
 .messages-card {
   margin-top: 15px;
 }
@@ -32,6 +27,12 @@ main, .messages-card {
   padding: 0;
   margin: 0 auto;
 }
+
+.mdl-layout__content {
+  min-height: 800px;
+}
+
+
 .mdl-card__supporting-text {
   width: auto;
   height: 100%;
@@ -113,17 +114,6 @@ main, .messages-card {
   background: linear-gradient(white, #f9f9f9);
   justify-content: space-between;
 }
-/* #user-container {
-  position: absolute;
-  display: flex;
-  flex-direction: row;
-  top: 22px;
-  width: 100%;
-  right: 0;
-  padding-left: 10px;
-  justify-content: flex-end;
-  padding-right: 10px;
-} */
 
 .top-header {
   width: 100%;
@@ -253,4 +243,8 @@ main, .messages-card {
 .mat-table {
   overflow: auto;
   max-height: 500px;
+}
+
+.heart-icon{
+  color: #f44336;
 }

@@ -56,21 +56,37 @@
                     <div fxLayout="row" *ngIf="currenUserProfile">
                         <div fxFlex="70">
                           <div> 
-                              <h5>Profile</h5> 
-                              <b>Name:</b> <span>{{currenUserProfile.userName}}</span>
+                              <h5><b>Name:</b> {{currenUserProfile.userName}}</h5>
                           </div>
                           <div fxLayout="row">
-                            <div fxFlex="50">
-                                <h5>Hobbies</h5> 
-                                <i class="fa fa-gamepad fa-2x profile-icon"></i>     
-                                <i class="fa fa-camera-retro fa-2x profile-icon"></i>
-                                <i class="fa fa-dribbble fa-2x profile-icon"></i>
-                                <i class="fa fa-flask fa-2x profile-icon"></i>
+                            <div fxFlex="60">
+                            
+                            <h5>Hobbies {{groupHobbieInit | json}}</h5>
+                                <mat-button-toggle-group (change)="changeHobbie($event)" [value]="groupHobbieInit">
+                                    <mat-button-toggle value="0">
+                                        <i class="fa fa-gamepad fa-2x profile-icon"></i>
+                                    </mat-button-toggle>
+                                    <mat-button-toggle value="1">
+                                        <i class="fa fa-camera-retro fa-2x profile-icon"></i>
+                                    </mat-button-toggle>
+                                    <mat-button-toggle value="2">
+                                        <i class="fa fa-dribbble fa-2x profile-icon"></i>
+                                    </mat-button-toggle>
+                                    <mat-button-toggle value="3">
+                                        <i class="fa fa-flask fa-2x profile-icon"></i>
+                                    </mat-button-toggle>
+                                </mat-button-toggle-group> 
                             </div>
-                            <div fxFlex="50">
-                                <h5>Avatar</h5>
-                                <i class="fa fa-male fa-2x profile-icon"></i>
-                                <i class="fa fa-female fa-2x profile-icon"></i>   
+                            <div fxFlex="40">
+                                <h5>Avatar {{groupSexInit | json}}</h5>
+                                <mat-button-toggle-group (change)="changeSex($event)" [value]="groupSexInit">
+                                    <mat-button-toggle value="0">
+                                        <i class="fa fa-male fa-2x profile-icon"></i>
+                                    </mat-button-toggle>
+                                    <mat-button-toggle value="1">
+                                        <i class="fa fa-female fa-2x profile-icon"></i>   
+                                    </mat-button-toggle>
+                                </mat-button-toggle-group>
                             </div>
                           </div>  
                         </div>
@@ -107,7 +123,8 @@
                   </mat-card-header>
                   <img mat-card-image [class.image-disable]="checkContainsItem(item.itemId)" src="{{item.src}}">
                   <mat-card-actions *ngIf="currenUserProfile">
-                    <button mat-raised-button class="item-button" *ngIf="(currenUserProfile.items.indexOf(item.itemId) === -1)" (click)="buyItem(item)">BUY ITEM</button>
+                    <button mat-raised-button class="item-button" *ngIf="(currenUserProfile.items.indexOf(item.itemId) === -1)" (click)="openDialog(item)">BUY ITEM</button> 
+                    <!-- (click)="buyItem(item)" -->
                     <button  mat-raised-button class="item-button item-button-buy" *ngIf="(currenUserProfile.items.indexOf(item.itemId) > -1)" (click)="changeSelectedItem(item)">USE STICKER</button>
                   </mat-card-actions>
                 </mat-card>

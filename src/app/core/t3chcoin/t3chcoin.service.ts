@@ -52,7 +52,10 @@ export class T3chcoinService {
 
   updateUser(userId: string, username: string, avatar: string, selecteditem: string): Observable<any> {
     return this.http
-      .put(`${environment.apiUrl}/user/${userId}`, { username, avatar, selecteditem: this.stringToBytes32(selecteditem) })
+      .put(`${environment.apiUrl}/user/${userId}`, {
+        username: username,
+        avatar: this.stringToBytes32(avatar),
+        selecteditem: this.stringToBytes32(selecteditem)})
       .map(res => this.extractData(res))
       .catch(this.handleError);
   }

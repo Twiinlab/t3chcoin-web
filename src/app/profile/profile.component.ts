@@ -2,10 +2,12 @@ import { Component, Inject } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
 import { AngularFireAuth } from 'angularfire2/auth';
-import { MatSnackBar } from '@angular/material';
+import { MatSnackBar, MatDialog } from '@angular/material';
 import * as firebase from 'firebase';
 
 import { T3chcoinService } from '../core/t3chcoin/t3chcoin.service';
+import { DialogItemComponent } from './dialog-item/dialog-item.component';
+
 
 
 const LOADING_IMAGE_URL = 'https://www.google.com/images/spin-32.gif';
@@ -22,25 +24,28 @@ export class ProfileComponent {
   currentUser: firebase.User;
   messages: FirebaseListObservable<any>;
   profilePicStyles: {};
-  topics = '';
-  value = '';
+
   currenUserProfile: any;
   currenSocialProfile: any;
   itemsCatalog: any;
   cards = [
-    {src: 'assets/cardimages/31e704b1-e61e-4d30-a8ba-97f1f74ef630.jpg', alt: 'Photo1 of a Shiba Inu'},
-    {src: 'assets/cardimages/193f5929-cab0-4d54-b4f8-eddc90be0328.jpg', alt: 'Photo2 of a Shiba Inu'},
-    {src: 'assets/cardimages/29041744-100f-469e-bb27-79e6a00455cf.jpg', alt: 'Photo3 of a Shiba Inu'},
-    {src: 'assets/cardimages/da525caa-2ca4-4371-8609-8c1677551c26.jpg', alt: 'Photo4 of a Shiba Inu'},
-    {src: 'assets/cardimages/e97f9ff7-0d33-4186-933e-43cf1faf3350.jpg', alt: 'Photo5 of a Shiba Inu'},
-    {src: 'assets/cardimages/e39330f1-708a-4959-a395-7598f1bf1cef.jpg', alt: 'Photo6 of a Shiba Inu'}
+    {src: 'assets/cardimages/31e704b1-e61e-4d30-a8ba-97f1f74ef630.jpg'},
+    {src: 'assets/cardimages/193f5929-cab0-4d54-b4f8-eddc90be0328.jpg'},
+    {src: 'assets/cardimages/29041744-100f-469e-bb27-79e6a00455cf.jpg'},
+    {src: 'assets/cardimages/da525caa-2ca4-4371-8609-8c1677551c26.jpg'},
+    {src: 'assets/cardimages/e97f9ff7-0d33-4186-933e-43cf1faf3350.jpg'},
+    {src: 'assets/cardimages/e39330f1-708a-4959-a395-7598f1bf1cef.jpg'}
   ];
+  groupHobbieInit = 1;
+  groupSexInit = 1;
+  currentSelectedItem: any;
 
   constructor(
     public db: AngularFireDatabase,
     public afAuth: AngularFireAuth,
     public snackBar: MatSnackBar,
-    public t3chcoinService: T3chcoinService) {
+    public t3chcoinService: T3chcoinService,
+    public dialog: MatDialog) {
     this.user = afAuth.authState;
     this.userListener();
     this.initCatalog();
@@ -80,7 +85,6 @@ export class ProfileComponent {
         this.profilePicStyles = {
           'background-image':  PROFILE_PLACEHOLDER_IMAGE_URL
         };
-        this.topics = '';
       }
     });
   }
@@ -97,9 +101,9 @@ export class ProfileComponent {
       });
   }
 
-  buyItem(item) {
+  buyItem(itemId) {
     const self = this;
-    this.t3chcoinService.buyItem(this.currenUserProfile.userId, item.itemId)
+    this.t3chcoinService.buyItem(this.currenUserProfile.userId, itemId)
     .subscribe(result => {
       self.getUserProfile(this.currenUserProfile.userId);
     });
@@ -107,10 +111,10 @@ export class ProfileComponent {
 
   changeSelectedItem(item) {
     this.currenUserProfile.selectedItem = item.itemId;
-    this.updateSelectedItem();
+    this.updateUser();
   }
 
-  updateSelectedItem() {
+  updateUser() {
     const self = this;
     this.t3chcoinService.updateUser(
       self.currenUserProfile.userId,
@@ -120,6 +124,20 @@ export class ProfileComponent {
     .subscribe(result => {
       self.getUserProfile(this.currenUserProfile.userId);
     });
+  }
+
+  changeHobbie(event) {
+    console.log(event);
+    this.groupHobbieInit = event.value;
+    this.currenUserProfile.avatar = this.groupSexInit + event.value;
+    this.updateUser();
+  }
+
+  changeSex(event) {
+    console.log(event);
+    this.groupSexInit = event.value;
+    this.currenUserProfile.avatar = event.value + this.groupHobbieInit;
+    this.updateUser();
   }
 
   getUserProfile(userId) {
@@ -140,6 +158,13 @@ export class ProfileComponent {
 
   fillUserProfile(userProfile) {
     this.currenUserProfile = userProfile;
+    this.updateAvatar(userProfile.avatar);
+  }
+
+  updateAvatar(avatar) {
+    const avatarInt = !isNaN(parseInt(avatar, 10)) ? parseInt(avatar, 10) : 0;
+    this.groupHobbieInit = (avatarInt % 10) % 4;
+    this.groupSexInit = (Math.round(avatarInt / 10) > 0) ? 1 : 0;
   }
 
   fillSocialProfile(socialProfile) {
@@ -163,11 +188,6 @@ export class ProfileComponent {
     this.afAuth.auth.signOut();
   }
 
-  // TODO: Refactor into text message form component
-  update(value: string) {
-    this.value = value;
-  }
-
   // Returns true if user is signed-in. Otherwise false and displays a message.
   checkSignedInWithMessage() {
     // Return true if the user is signed in Firebase
@@ -184,5 +204,20 @@ export class ProfileComponent {
 
     return false;
   };
+
+  openDialog(item): void {
+    const self = this;
+    self.currentSelectedItem = item;
+    const dialogRef = this.dialog.open(DialogItemComponent, {
+      width: '20%',
+      data: item
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.buyItem(self.currentSelectedItem);
+      }
+    });
+  }
 
 }

@@ -10,16 +10,24 @@ const PROFILE_PLACEHOLDER_IMAGE_URL = '/assets/images/profile_placeholder.png';
 })
 export class HomeComponent implements OnInit {
 
-  messages: any;
-  tableColumns = ['photoUrl', 'socialId', 'totalAll', 'totalTwit', 'totalTwitLike', 'totalTwitRetweet'];
+  socialMessages: any;
+  tableSocialColumns = ['photoUrl', 'socialId', 'totalAll', 'totalTwit', 'totalTwitRetweet', 'totalTwitLike'];
+
+  userMessages: any;
+  tableUserColumns = ['avatar', 'selectedItem', 'userName', 'itemsCount', 'balance'];
 
   constructor(public t3chcoinService: T3chcoinService) { }
 
   ngOnInit() {
+    this.initSocialMessage();
+    this.initUserMessage()
+  }
+
+  initSocialMessage() {
     this.t3chcoinService
     .getTopSocials()
     .subscribe(socials => {
-      this.messages = socials.map(item => {
+      this.socialMessages = socials.map(item => {
         return {
           photoUrl: PROFILE_PLACEHOLDER_IMAGE_URL,
           socialId: item.socialId || '#UserName',
@@ -30,6 +38,21 @@ export class HomeComponent implements OnInit {
         }
       });
     });
+  }
 
+  initUserMessage() {
+    this.t3chcoinService
+    .getUserTopList()
+    .subscribe(user => {
+      this.userMessages  = user.map(item => {
+        return {
+          avatar: PROFILE_PLACEHOLDER_IMAGE_URL,
+          selectedItem: item.selectedItem,
+          userName: item.userName || '#UserName',
+          balance: item.balance,
+          itemsCount: item.itemsCount
+        }
+      });
+    });
   }
 }

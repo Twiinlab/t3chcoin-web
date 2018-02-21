@@ -10,7 +10,9 @@ import {
   MatIconModule,
   MatDialogModule,
   MatProgressSpinnerModule,
-  MatSnackBarModule
+  MatSnackBarModule,
+  MatTabsModule,
+  MatButtonToggleModule
 } from '@angular/material';
 import { NgModule } from '@angular/core';
 
@@ -27,7 +29,9 @@ import { NgModule } from '@angular/core';
     MatIconModule,
     MatDialogModule,
     MatProgressSpinnerModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatTabsModule,
+    MatButtonToggleModule
   ],
   exports: [
     FlexLayoutModule,
@@ -41,7 +45,9 @@ import { NgModule } from '@angular/core';
     MatIconModule,
     MatDialogModule,
     MatProgressSpinnerModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatTabsModule,
+    MatButtonToggleModule
   ],
 })
 export class CustomMaterialModule { }
