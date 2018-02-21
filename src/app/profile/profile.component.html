@@ -28,7 +28,7 @@
       <main class="mdl-layout__content mdl-color--grey-100">
         <div id="messages-card-container" class="mdl-cell mdl-cell--12-col mdl-grid">
           <!-- Messages container -->
-          <div fxLayout="row">
+          <div fxLayout="row" style="width:100%;">
               <!-- <div fxFlex="50" fxLayout="column">
                 <mat-card class="example-card"  >
                   <mat-card-header>
@@ -40,8 +40,10 @@
                 </mat-card>
               </div> -->
               <div fxFlex="30" style="padding:30px;" fxLayout="column">
-                <img mat-card-image *ngIf="currenUserProfile === undefined" [src]="'https://material.angular.io/assets/img/examples/shiba2.jpg'">
-                <img mat-card-image *ngIf="currenUserProfile" [src]="getSrcImage(currenUserProfile.selectedItem)">                
+                <!-- <img mat-card-image *ngIf="currenUserProfile === undefined" [style.background-image]="'assets/avatars/avatar1.png'"> -->
+                <div mat-card-image class="avatar-image" *ngIf="currenUserProfile" [style.background-image]="'url(' + getSrcAvatar(groupHobbieInit) + ')'">
+                  <!-- <img mat-card-image *ngIf="currenUserProfile === undefined" [src]="getSrcImage(currenUserProfile.selectedItem)"> -->
+                </div>
               </div>
               
 

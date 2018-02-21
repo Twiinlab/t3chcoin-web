@@ -244,3 +244,10 @@
   .mat-button-toggle-checked {
     background-color: #0288d1;
   }
+
+  .avatar-image {
+    min-height: 360px;
+    background-size: 90%;
+    background-repeat: no-repeat;
+    background-position-x: center;
+  }

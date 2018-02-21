@@ -28,6 +28,10 @@ export class ProfileComponent {
   currenUserProfile: any;
   currenSocialProfile: any;
   itemsCatalog: any;
+
+  avatars: Array<any> = [];
+  stickers: Array<any> = [];
+
   cards = [
     {src: 'assets/cardimages/31e704b1-e61e-4d30-a8ba-97f1f74ef630.jpg'},
     {src: 'assets/cardimages/193f5929-cab0-4d54-b4f8-eddc90be0328.jpg'},
@@ -36,6 +40,7 @@ export class ProfileComponent {
     {src: 'assets/cardimages/e97f9ff7-0d33-4186-933e-43cf1faf3350.jpg'},
     {src: 'assets/cardimages/e39330f1-708a-4959-a395-7598f1bf1cef.jpg'}
   ];
+
   groupHobbieInit = 1;
   groupSexInit = 1;
   currentSelectedItem: any;
@@ -48,7 +53,17 @@ export class ProfileComponent {
     public dialog: MatDialog) {
     this.user = afAuth.authState;
     this.userListener();
+    this.initAssets();
     this.initCatalog();
+  }
+
+  initAssets() {
+    for (let i = 1; i < 21; i++) {
+      this.stickers.push({ src: './assets/stickers/sticker' + i + '.png'});
+    }
+    for (let i = 1; i < 5; i++) {
+      this.avatars.push({ src: './assets/avatars/avatar' + i + '.png'});
+    }
   }
 
   initCatalog() {
@@ -56,7 +71,7 @@ export class ProfileComponent {
     self.t3chcoinService.getItemsCatalog()
         .subscribe(catalog => {
           self.itemsCatalog = catalog.map(item => {
-            item.src = self.cards[item.itemId % self.cards.length].src;
+            item.src = (self.stickers[(item.itemId % self.stickers.length)]).src;
             return item;
           });
         });
@@ -171,9 +186,13 @@ export class ProfileComponent {
     this.currenSocialProfile = socialProfile;
   }
 
+  getSrcAvatar(selectedAvatar) {
+    return (this.avatars[selectedAvatar].src) ? this.avatars[selectedAvatar].src : './assets/avatars/avatar1.png';
+  }
+
   getSrcImage(selectedItem) {
     const selected = this.itemsCatalog.filter(item => item.itemId === selectedItem);
-    return (selected.length > 0 ? selected[0].src : 'https://material.angular.io/assets/img/examples/shiba2.jpg');
+    return (selected.length > 0 ? selected[0].src : './assets/avatars/avatar1.png');
   }
 
   checkContainsItem(itemId) {
