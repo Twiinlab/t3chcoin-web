@@ -112,20 +112,13 @@
     background: linear-gradient(white, #f9f9f9);
     justify-content: space-between;
   }
-  /* #user-container {
-    position: absolute;
-    display: flex;
-    flex-direction: row;
-    top: 22px;
-    width: 100%;
-    right: 0;
-    padding-left: 10px;
-    justify-content: flex-end;
-    padding-right: 10px;
-  } */
 
   .top-header {
     width: 100%;
+  }
+
+  .title-header {
+    max-width: 54%;
   }
 
   .user-pic {
@@ -200,8 +193,16 @@
   }
   
   .example-header-image {
-    background-image: url('http://icons.iconarchive.com/icons/froyoshark/enkel/256/Bitcoin-icon.png');
-    background-size: cover;
+    background-image: url('/assets/images/token-orange.png');
+    background-size: 80%;
+    background-repeat: no-repeat;
+  }
+
+  .mat-card-avatar {
+    width: 40px;
+    height: auto;
+    flex-shrink: 0;
+    border-radius: inherit;
   }
 
   .profile-container {
@@ -245,9 +246,36 @@
     background-color: #0288d1;
   }
 
+  .label-text {
+    font-size: 20px;
+    margin-top: -10px;
+  }
+  
   .avatar-image {
     min-height: 360px;
     background-size: 90%;
     background-repeat: no-repeat;
     background-position-x: center;
+    /* background-size: cover; */
+    text-align: center;
+  }
+
+  .avatar-sticker {
+    width: 30%;
+    position: relative;
+    margin-top: 82%;
+  }
+
+  .token-image {
+    background-image: url(../../assets/images/token.png);
+    background-repeat: no-repeat;
+    background-size: 50%;
+    height: 100%;
+  }
+
+  .token-amount {
+    position: relative;
+    top: 4vw;
+    font-size: 4vw;
+    left: 20%;
   }

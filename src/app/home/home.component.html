@@ -1,21 +1,25 @@
 <div class="demo-layout mdl-layout mdl-js-layout mdl-layout--fixed-header">
-  <!-- Header section containing logo -->
-  <header class="mdl-layout__header mdl-color-text--white mdl-color--light-blue-700">
-    <div class="mdl-cell mdl-cell--12-col mdl-cell--12-col-tablet mdl-grid">
-      <div class="top-header" fxLayout="row">
-        <div fxFlex="50" fxLayout="row" fxLayoutAlign="start center">
-          <i class="fa fa-btc fa-3x"></i>
-          <h3 fxFlex="30">T3chCoin</h3>
-          <div fxFlex="60"></div>
-        </div>
-        <div fxFlex="50" fxLayoutAlign="end center">
-          <button routerLink="/profile" routerLinkActive="active" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-color-text--white">
-            <i class="material-icons">account_circle</i>My site
-          </button>
+    <header class="mdl-layout__header mdl-color-text--white mdl-color--light-blue-700">
+      <div class="mdl-cell mdl-cell--12-col mdl-cell--12-col-tablet mdl-grid">
+        <div class="top-header" fxLayout="row">
+          <div fxFlex="60" fxLayout="row" fxLayoutAlign="start center">
+            <img fxFlex="50" class="title-header" routerLink="/" routerLinkActive="active" src="./assets/images/title-orange-white.png">
+            <div fxFlex="10"></div>
+            <button fxFlex="20" mat-button routerLink="/" routerLinkActive="active">
+              HALL OF FAME
+            </button>
+            <button fxFlex="20" mat-button routerLink="/profile" routerLinkActive="active">
+              PROFILE
+            </button>
+          </div>
+          <div fxFlex="40" fxLayoutAlign="end center">
+              <button routerLink="/profile" routerLinkActive="active" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-color-text--white">
+                <i class="material-icons">account_circle</i>My site
+              </button>
+          </div>
         </div>
       </div>
-    </div>
-  </header>
+    </header>
 
   <main class="mdl-layout__content mdl-color--grey-100">
     <div class="mdl-cell mdl-cell--12-col mdl-grid">

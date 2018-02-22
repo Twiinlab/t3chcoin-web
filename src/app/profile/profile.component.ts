@@ -120,8 +120,11 @@ export class ProfileComponent {
     const self = this;
     this.t3chcoinService.buyItem(this.currenUserProfile.userId, itemId)
     .subscribe(result => {
-      self.getUserProfile(this.currenUserProfile.userId);
-    });
+        self.getUserProfile(this.currenUserProfile.userId);
+      },
+      err => {
+        self.showMessage('Sorry, You don´t have enough tokens', 'Let´s Twits');
+      });
   }
 
   changeSelectedItem(item) {
@@ -190,9 +193,9 @@ export class ProfileComponent {
     return (this.avatars[selectedAvatar].src) ? this.avatars[selectedAvatar].src : './assets/avatars/avatar1.png';
   }
 
-  getSrcImage(selectedItem) {
+  getSrcSticker(selectedItem) {
     const selected = this.itemsCatalog.filter(item => item.itemId === selectedItem);
-    return (selected.length > 0 ? selected[0].src : './assets/avatars/avatar1.png');
+    return (selected.length > 0 ? selected[0].src : './assets/stickers/sticker0.png');
   }
 
   checkContainsItem(itemId) {
@@ -224,6 +227,15 @@ export class ProfileComponent {
     return false;
   };
 
+  showMessage(messageTitle: string, messageBody: string) {
+    this.snackBar
+      .open(messageTitle, messageBody, {
+        duration: 5000
+      })
+      .onAction()
+      .subscribe(() => window.open('https://twitter.com'));
+  }
+
   openDialog(item): void {
     const self = this;
     self.currentSelectedItem = item;
@@ -234,7 +246,7 @@ export class ProfileComponent {
 
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        this.buyItem(self.currentSelectedItem);
+        this.buyItem(self.currentSelectedItem.itemId);
       }
     });
   }
