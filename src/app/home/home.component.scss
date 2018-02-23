@@ -1,0 +1,54 @@
+main {
+  height: 100%;
+  padding-bottom: 0;
+}
+
+.mdl-layout__header {
+  height: 80px;
+}
+
+.mdl-layout__header-row span {
+  margin-left: 15px;
+  margin-top: 17px;
+}
+
+.mdl-grid {
+  max-width: 1024px;
+  margin: auto;
+}
+
+.flex-center {
+  color: #fff;
+}
+
+.intro-1 {
+  background: url("https://t3chfest.uc3m.es/2018/static/assets/media/home/header2.jpg")no-repeat center center;
+  background-size: cover;
+  margin-top: 80px;
+  height: 600px;
+}
+
+.navbar .btn-group .dropdown-menu a:hover {
+  color: #000 !important;
+}
+
+.navbar .btn-group .dropdown-menu a:active {
+  color: #fff !important;
+}
+@media only screen and (max-width: 667px) {
+  .display-3 {
+      font-size: 3rem;
+  }
+}
+@media only screen and (max-width: 767px) {
+  .navbar {
+      background-color: #1C2331;
+  }
+  .display-3 {
+      font-size: 2rem;
+      margin-top: 5rem;
+  }
+  h3 {
+      font-size: 1rem;
+  }
+}

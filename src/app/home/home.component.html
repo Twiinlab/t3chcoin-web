@@ -1,83 +1,197 @@
+<!-- navbar navbar-expand-lg navbar-dark indigo fixed-top -->
 <div class="demo-layout mdl-layout mdl-js-layout mdl-layout--fixed-header">
-    <header class="mdl-layout__header mdl-color-text--white mdl-color--light-blue-700">
-      <div class="mdl-cell mdl-cell--12-col mdl-cell--12-col-tablet mdl-grid">
-        <div class="top-header" fxLayout="row">
-          <div fxFlex="60" fxLayout="row" fxLayoutAlign="start center">
-            <img fxFlex="50" class="title-header" routerLink="/" routerLinkActive="active" src="./assets/images/title-orange-white.png">
-            <div fxFlex="10"></div>
-            <button fxFlex="20" mat-button routerLink="/" routerLinkActive="active">
-              HALL OF FAME
-            </button>
-            <button fxFlex="20" mat-button routerLink="/profile" routerLinkActive="active">
-              PROFILE
-            </button>
-          </div>
-          <div fxFlex="40" fxLayoutAlign="end center">
-              <button routerLink="/profile" routerLinkActive="active" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-color-text--white">
-                <i class="material-icons">account_circle</i>My site
+    <header class="fixed-top mdl-layout__header mdl-color-text--white mdl-color--light-blue-700">
+        <div class="mdl-cell mdl-cell--12-col mdl-cell--12-col-tablet mdl-grid">
+          <div class="top-header" fxLayout="row">
+            <div fxFlex="60" fxLayout="row" fxLayoutAlign="start center">
+              <img fxFlex="50" class="title-header" routerLink="/" routerLinkActive="active" src="./assets/images/title-orange-white.png">
+              <div fxFlex="10"></div>
+              <button fxFlex="20" mat-button routerLink="/" routerLinkActive="active">
+                HOW IT WORKS
               </button>
+              <button fxFlex="20" mat-button routerLink="/hall" routerLinkActive="active">
+                HALL OF FAME
+              </button>
+            </div>
+            <div fxFlex="40" fxLayoutAlign="end center">
+                <button routerLink="/profile" routerLinkActive="active" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-color-text--white">
+                  <i class="material-icons">account_circle</i>My site
+                </button>
+            </div>
           </div>
         </div>
-      </div>
-    </header>
+      </header>
 
-  <main class="mdl-layout__content mdl-color--grey-100">
-    <div class="mdl-cell mdl-cell--12-col mdl-grid">
-    <h2>Hall of fame</h2>
-    <mat-card>
-      <mat-card-content>
-        <mat-tab-group class="demo-tab-group">
-          <mat-tab label="Top Influencers">
-            <div class="demo-tab-content">
-              <table>
-                  <tr class="message-container">
-                    <th style="width:150px">Avatar</th>
-                    <th style="width:150px">Name</th>
-                    <th style="width:150px"> <i class="fa fa-bullhorn fa-2x"></i></th>
-                    <th style="width:150px"> <i class="fa fa-twitter fa-2x"></i></th>
-                    <th style="width:150px"> <i class="fa fa-retweet fa-2x"></i></th>
-                    <th style="width:150px"> <i class="fa fa-heart fa-2x" style="color: #f44336;"></i></th>
-                  </tr>
-                  <tr class="message-container" *ngFor="let message of socialMessages">
-                    <td style="width:150px" *ngFor="let col of tableSocialColumns">
-                        <div *ngIf="col === 'photoUrl'">
-                          <div class="pic" [style.background-image]="'url(' + message.photoUrl + ')'"></div>
-                        </div>
-                        <div *ngIf="col !== 'photoUrl'">
-                          {{message[col]}}
-                        </div>
-                    </td>
-                  </tr>
-                </table>
+    
+    <main>
+        <div class="intro-1 hm-black-slight">
+          <div class="full-bg-img flex-center">
+            <div class="container">
+                <ul>
+                    <li>
+                        <h1 class="display-3 font-bold">T3chCoin</h1>
+                        <h4 class="display-4 mt-4 mb-5">Shaping the world with tokens</h4>
+                    </li>
+                    <li>
+                        <a routerLink="/profile" routerLinkActive="active" routerLink="/profile" class="btn btn-indigo btn-lg " >Experiment!</a>
+                        <a target="_blank" href="https://t3chfest.uc3m.es/2018/programa/t3chcoin-dando-forma-mundo-base-tokens/" class="btn btn-outline-white btn-lg ">Watch Talk</a>
+                    </li>
+                </ul>
             </div>
-          </mat-tab>
-          <mat-tab label="Top Users">
-              <div class="demo-tab-content">
-                  <table>
-                      <tr class="message-container">
-                        <th style="width:150px">Avatar</th>
-                        <th style="width:150px">Hero in</th>
-                        <th style="width:150px">Name</th>
-                        <th style="width:150px"> <i class="fa fa-trophy fa-2x"></i></th>
-                        <th style="width:150px"> <i class="fa fa-bitcoin fa-2x"></i></th>
-                      </tr>
-                      <tr class="message-container" *ngFor="let message of userMessages">
-                        <td style="width:150px" *ngFor="let col of tableUserColumns">
-                            <div *ngIf="col === 'avatar'">
-                              <div class="pic" [style.background-image]="'url(' + message.avatar + ')'"></div>
-                            </div>
-                            <div *ngIf="col !== 'avatar'">
-                              {{message[col]}}
-                            </div>
-                        </td>
-                      </tr>
-                    </table>
+            </div>
+        </div>
+        <div class="container text-center">
+          <h1 class="font-bold py-5 mb-3">THE EXPERIMENT</h1>
+          <div class="row">
+            
+              <!--Grid column-->
+              <div class="col-md-12">
+                  
+                  <!--Card-->
+                  <div class="card card-cascade wider reverse">
+
+                      <!--Card image-->
+                      <div class="view overlay hm-white-slight">
+                          <img src="https://mdbootstrap.com/img/Photos/Slides/img%20(70).jpg" class="img-fluid">
+                          <a href="#!">
+                              <div class="mask waves-effect waves-light"></div>
+                          </a>
+                      </div>
+                      <!--/Card image-->
+
+                      <!--Card content-->
+                      <div class="card-body text-center">
+                          <!--Title-->
+                          <h4 class="card-title"><strong>My adventure</strong></h4>
+                          <h5 class="indigo-text"><strong>Photography</strong></h5>
+
+                          <p class="card-text">Sed ut perspiciatis unde omnis iste natus sit voluptatem accusantium doloremque laudantium, totam rem aperiam.
+                          </p>
+
+                          <!--Linkedin-->
+                          <a class="icons-sm li-ic"><i class="fa fa-linkedin"> </i></a>
+                          <!--Twitter-->
+                          <a class="icons-sm tw-ic"><i class="fa fa-twitter"> </i></a>
+                          <!--Dribbble-->
+                          <a class="icons-sm fb-ic"><i class="fa fa-facebook"> </i></a>
+
+                      </div>
+                      <!--/.Card content-->
+
+                  </div>
+                  <!--/.Card-->
+          
               </div>
-            </mat-tab>
-        </mat-tab-group>
-      </mat-card-content>
-    </mat-card>
-  </div>
-  </main>
+              <!--Grid column-->
+          
+          </div>
+          <h1 class="font-bold py-5 mb-3">TEAM</h1>          
+          <div class="row">
+            
+              <div class="col-lg-2"></div>
+              <div class="col-lg-4 col-md-6 mb-r">
+                  
+                  <!--Card-->
+                  <div class="card card-cascade">
+
+                      <!--Card image-->
+                      <div class="view overlay hm-white-slight">
+                          <img src="https://mdbootstrap.com/img/Photos/Others/men.jpg" class="img-fluid" alt="">
+                          <a>
+                              <div class="mask waves-effect waves-light"></div>
+                          </a>
+                      </div>
+                      <!--/.Card image-->
+
+                      <!--Card content-->
+                      <div class="card-body text-center">
+                          <!--Title-->
+                          <h4 class="card-title"><strong>Billy Cullen</strong></h4>
+                          <h5>Web developer</h5>
+
+                          <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus, ex, recusandae. Facere modi sunt, quod quibusdam.
+                          </p>
+                          <button mat-mini-fab color="primary">
+                              <i class="fa fa-google fa-2x"></i>
+                          </button>
+                          <button mat-mini-fab color="accent">
+                              <i class="fa fa-twitter fa-2x"></i>
+                          </button>
+                          <button mat-mini-fab color="warn">
+                              <i class="fa fa-linkedin fa-2x"></i>
+                          </button>
+                      </div>
+                      <!--/.Card content-->
+
+                  </div>
+                  <!--/.Card-->
+                  
+              </div>
+
+              <div class="col-lg-4 col-md-6 mb-r">
+                  
+                  <!--Card-->
+                  <div class="card card-cascade">
+
+                      <!--Card image-->
+                      <div class="view overlay hm-white-slight">
+                          <img src="https://mdbootstrap.com/img/Photos/Others/men.jpg" class="img-fluid" alt="">
+                          <a>
+                              <div class="mask waves-effect waves-light"></div>
+                          </a>
+                      </div>
+                      <!--/.Card image-->
+
+                      <!--Card content-->
+                      <div class="card-body text-center">
+                          <!--Title-->
+                          <h4 class="card-title"><strong>Billy Cullen</strong></h4>
+                          <h5>Web developer</h5>
+
+                          <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus, ex, recusandae. Facere modi sunt, quod quibusdam.
+                          </p>
+                          <button mat-mini-fab color="primary">
+                              <i class="fa fa-google fa-2x"></i>
+                          </button>
+                          <button mat-mini-fab color="accent">
+                              <i class="fa fa-twitter fa-2x"></i>
+                          </button>
+                          <button mat-mini-fab color="warn">
+                              <i class="fa fa-linkedin fa-2x"></i>
+                          </button>
+                      </div>
+                      <!--/.Card content-->
+
+                  </div>
+                  <!--/.Card-->
+                  
+              </div>
+              <div class="col-lg-2"></div>
+              
+          </div>
+          <h1 class="font-bold py-5 mb-3">SOCIAL</h1>     
+          <h5>Do you want to hear more about the project?</h5>          
+          <a target="_blank" href="https://mdbootstrap.com/material-design-for-bootstrap/" class="btn btn-blue waves-effect waves-light" rel="nofollow">Join Telegram</a>
+          <a target="_blank" href="https://mdbootstrap.com/material-design-for-bootstrap/" class="btn btn-blue waves-effect waves-light" rel="nofollow">Follow us in Twitter</a>
+          
+        </div>
+    </main>
+    <footer class="page-footer center-on-small-only indigo mt-5">
+
+        <!--Footer Links-->
+        <div class="container-fluid pr-0 pl-0">
+
+            <!--Call to action-->
+            <div class="call-to-action">
+                <h4 class="mb-5">Thanks for your support</h4>
+                
+            </div>
+            <div class="footer-copyright">
+                <div class="container-fluid">
+                    © 2018 Copyright:
+                    <a href="https://www.T3chCoin.com"> T3chCoin.com </a>
+                </div>
+            </div>
+    </div></footer>
 </div>
     

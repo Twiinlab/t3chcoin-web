@@ -1,10 +1,11 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, NO_ERRORS_SCHEMA } from '@angular/core';
 import { ROUTING } from './app.routing';
 import { CoreModule } from './core/core.module';
 
-import {MatCardModule} from '@angular/material/card';
-import {MatGridListModule} from '@angular/material/grid-list';
+import { MDBBootstrapModule } from 'angular-bootstrap-md';
+import { MatCardModule } from '@angular/material/card';
+import { MatGridListModule } from '@angular/material/grid-list';
 
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
@@ -12,6 +13,7 @@ import { AngularFireAuthModule } from 'angularfire2/auth';
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
+import { HallComponent } from './hall/hall.component';
 import { ProfileComponent } from './profile/profile.component';
 import { DialogItemComponent } from '../app/profile/dialog-item/dialog-item.component';
 import { NotFoundComponent } from './notfound/notfound.component';
@@ -40,6 +42,7 @@ if (!environment.firebase) {
   declarations: [
     AppComponent,
     HomeComponent,
+    HallComponent,
     ProfileComponent,
     DialogItemComponent,
     NotFoundComponent
@@ -52,10 +55,12 @@ if (!environment.firebase) {
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireDatabaseModule,
     AngularFireAuthModule,
-    ROUTING
+    ROUTING,
+    MDBBootstrapModule.forRoot()
   ],
   providers: [],
   entryComponents: [DialogItemComponent],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  schemas: [ NO_ERRORS_SCHEMA ]
 })
 export class AppModule { }

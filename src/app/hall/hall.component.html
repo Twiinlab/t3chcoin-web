@@ -1,0 +1,83 @@
+<div class="demo-layout mdl-layout mdl-js-layout mdl-layout--fixed-header">
+    <header class="mdl-layout__header mdl-color-text--white mdl-color--light-blue-700">
+      <div class="mdl-cell mdl-cell--12-col mdl-cell--12-col-tablet mdl-grid">
+        <div class="top-header" fxLayout="row">
+          <div fxFlex="60" fxLayout="row" fxLayoutAlign="start center">
+            <img fxFlex="50" class="title-header" routerLink="/" routerLinkActive="active" src="./assets/images/title-orange-white.png">
+            <div fxFlex="10"></div>
+            <button fxFlex="20" mat-button routerLink="/" routerLinkActive="active">
+              HOW IT WORKS
+            </button>
+            <button fxFlex="20" mat-button routerLink="/hall" routerLinkActive="active">
+              HALL OF FAME
+            </button>
+          </div>
+          <div fxFlex="40" fxLayoutAlign="end center">
+              <button routerLink="/profile" routerLinkActive="active" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-color-text--white">
+                <i class="material-icons">account_circle</i>My site
+              </button>
+          </div>
+        </div>
+      </div>
+    </header>
+
+  <main class="mdl-layout__content mdl-color--grey-100">
+    <div class="mdl-cell mdl-cell--12-col mdl-grid">
+    <h2>Hall of fame</h2>
+    <mat-card>
+      <mat-card-content>
+        <mat-tab-group class="demo-tab-group">
+          <mat-tab label="Top Influencers">
+            <div class="demo-tab-content">
+              <table>
+                  <tr class="message-container">
+                    <th style="width:150px">Avatar</th>
+                    <th style="width:150px">Name</th>
+                    <th style="width:150px"> <i class="fa fa-bullhorn fa-2x"></i></th>
+                    <th style="width:150px"> <i class="fa fa-twitter fa-2x"></i></th>
+                    <th style="width:150px"> <i class="fa fa-retweet fa-2x"></i></th>
+                    <th style="width:150px"> <i class="fa fa-heart fa-2x" style="color: #f44336;"></i></th>
+                  </tr>
+                  <tr class="message-container" *ngFor="let message of socialMessages">
+                    <td style="width:150px" *ngFor="let col of tableSocialColumns">
+                        <div *ngIf="col === 'photoUrl'">
+                          <div class="pic" [style.background-image]="'url(' + message.photoUrl + ')'"></div>
+                        </div>
+                        <div *ngIf="col !== 'photoUrl'">
+                          {{message[col]}}
+                        </div>
+                    </td>
+                  </tr>
+                </table>
+            </div>
+          </mat-tab>
+          <mat-tab label="Top Users">
+              <div class="demo-tab-content">
+                  <table>
+                      <tr class="message-container">
+                        <th style="width:150px">Avatar</th>
+                        <th style="width:150px">Hero in</th>
+                        <th style="width:150px">Name</th>
+                        <th style="width:150px"> <i class="fa fa-trophy fa-2x"></i></th>
+                        <th style="width:150px"> <i class="fa fa-bitcoin fa-2x"></i></th>
+                      </tr>
+                      <tr class="message-container" *ngFor="let message of userMessages">
+                        <td style="width:150px" *ngFor="let col of tableUserColumns">
+                            <div *ngIf="col === 'avatar'">
+                              <div class="pic" [style.background-image]="'url(' + message.avatar + ')'"></div>
+                            </div>
+                            <div *ngIf="col !== 'avatar'">
+                              {{message[col]}}
+                            </div>
+                        </td>
+                      </tr>
+                    </table>
+              </div>
+            </mat-tab>
+        </mat-tab-group>
+      </mat-card-content>
+    </mat-card>
+  </div>
+  </main>
+</div>
+    

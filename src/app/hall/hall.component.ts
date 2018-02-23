@@ -4,11 +4,11 @@ import { T3chcoinService } from '../core/t3chcoin/t3chcoin.service';
 const PROFILE_PLACEHOLDER_IMAGE_URL = '/assets/images/profile_placeholder.png';
 
 @Component({
-  selector: 'home',
-  templateUrl: './home.component.html',
-  styleUrls: ['./home.component.scss']
+  selector: 'hall',
+  templateUrl: './hall.component.html',
+  styleUrls: ['./hall.component.scss']
 })
-export class HomeComponent implements OnInit {
+export class HallComponent implements OnInit {
 
   socialMessages: any;
   tableSocialColumns = ['photoUrl', 'socialId', 'totalAll', 'totalTwit', 'totalTwitRetweet', 'totalTwitLike'];
