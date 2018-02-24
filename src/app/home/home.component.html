@@ -33,7 +33,7 @@
                         <h4 class="display-4 mt-4 mb-5">Shaping the world with tokens</h4>
                     </li>
                     <li>
-                        <a routerLink="/profile" routerLinkActive="active" routerLink="/profile" class="btn btn-indigo btn-lg " >Experiment!</a>
+                        <a routerLink="/profile" routerLinkActive="active" routerLink="/profile" class="btn btn-blue btn-lg " >Experiment!</a>
                         <a target="_blank" href="https://t3chfest.uc3m.es/2018/programa/t3chcoin-dando-forma-mundo-base-tokens/" class="btn btn-outline-white btn-lg ">Watch Talk</a>
                     </li>
                 </ul>
@@ -52,8 +52,9 @@
 
                       <!--Card image-->
                       <div class="view overlay hm-white-slight">
-                          <img src="https://mdbootstrap.com/img/Photos/Slides/img%20(70).jpg" class="img-fluid">
-                          <a href="#!">
+                          <h5>¿How T3chCoin works?</h5>
+                          <img src="./assets/images/main-diagram.png" style="height: 70%; width: 70%;" class="img-fluid">
+                          <a >
                               <div class="mask waves-effect waves-light"></div>
                           </a>
                       </div>
@@ -88,15 +89,41 @@
           <h1 class="font-bold py-5 mb-3">TEAM</h1>          
           <div class="row">
             
-              <div class="col-lg-2"></div>
-              <div class="col-lg-4 col-md-6 mb-r">
+              <div class="col-lg-3"></div>
+              <div class="col-lg-3 col-md-6 mb-r">
+                  <div class="card card-cascade">
+                      <div class="view overlay hm-white-slight">
+                          <img src="./assets/images/profile_ruben.jpg" class="img-fluid" alt="">
+                          <a>
+                              <div class="mask waves-effect waves-light"></div>
+                          </a>
+                      </div>
+                      <div class="card-body text-center">
+                          <!--Title-->
+                          <h4 class="card-title"><strong>Rubén Chavarri</strong></h4>
+                          <h5>Software engineer</h5>
+                          <p class="card-text">KairosDS</p>
+                          <button mat-mini-fab color="primary" (click)="openLink('mailto:ruchavarri@gmail.com')">
+                              <i class="fa fa-google fa-2x"></i>
+                          </button>
+                          <button mat-mini-fab color="primary" (click)="openLink('https://twitter.com/pekewake')">
+                              <i class="fa fa-twitter fa-2x"></i>
+                          </button>
+                          <button mat-mini-fab color="primary" (click)="openLink('https://www.linkedin.com/in/ruchavarri/')">
+                              <i class="fa fa-linkedin fa-2x"></i>
+                          </button>
+                      </div>
+                  </div>
+              </div>
+
+              <div class="col-lg-3 col-md-6 mb-r">
                   
                   <!--Card-->
                   <div class="card card-cascade">
 
                       <!--Card image-->
                       <div class="view overlay hm-white-slight">
-                          <img src="https://mdbootstrap.com/img/Photos/Others/men.jpg" class="img-fluid" alt="">
+                          <img src="./assets/images/profile_david.jpg" class="img-fluid" alt="">
                           <a>
                               <div class="mask waves-effect waves-light"></div>
                           </a>
@@ -106,18 +133,16 @@
                       <!--Card content-->
                       <div class="card-body text-center">
                           <!--Title-->
-                          <h4 class="card-title"><strong>Billy Cullen</strong></h4>
-                          <h5>Web developer</h5>
-
-                          <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus, ex, recusandae. Facere modi sunt, quod quibusdam.
-                          </p>
-                          <button mat-mini-fab color="primary">
+                          <h4 class="card-title"><strong>David Chavarri</strong></h4>
+                          <h5>Software Architect</h5>
+                          <p class="card-text">BBVA</p>
+                          <button mat-mini-fab color="primary" (click)="openLink('mailto:dvdchavarri@gmail.com')">
                               <i class="fa fa-google fa-2x"></i>
                           </button>
-                          <button mat-mini-fab color="accent">
+                          <button mat-mini-fab color="primary" (click)="openLink('https://twitter.com/dvdchavarri')">
                               <i class="fa fa-twitter fa-2x"></i>
                           </button>
-                          <button mat-mini-fab color="warn">
+                          <button mat-mini-fab color="primary" (click)="openLink('https://www.linkedin.com/in/dchavarri/')">
                               <i class="fa fa-linkedin fa-2x"></i>
                           </button>
                       </div>
@@ -127,64 +152,24 @@
                   <!--/.Card-->
                   
               </div>
-
-              <div class="col-lg-4 col-md-6 mb-r">
-                  
-                  <!--Card-->
-                  <div class="card card-cascade">
-
-                      <!--Card image-->
-                      <div class="view overlay hm-white-slight">
-                          <img src="https://mdbootstrap.com/img/Photos/Others/men.jpg" class="img-fluid" alt="">
-                          <a>
-                              <div class="mask waves-effect waves-light"></div>
-                          </a>
-                      </div>
-                      <!--/.Card image-->
-
-                      <!--Card content-->
-                      <div class="card-body text-center">
-                          <!--Title-->
-                          <h4 class="card-title"><strong>Billy Cullen</strong></h4>
-                          <h5>Web developer</h5>
-
-                          <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus, ex, recusandae. Facere modi sunt, quod quibusdam.
-                          </p>
-                          <button mat-mini-fab color="primary">
-                              <i class="fa fa-google fa-2x"></i>
-                          </button>
-                          <button mat-mini-fab color="accent">
-                              <i class="fa fa-twitter fa-2x"></i>
-                          </button>
-                          <button mat-mini-fab color="warn">
-                              <i class="fa fa-linkedin fa-2x"></i>
-                          </button>
-                      </div>
-                      <!--/.Card content-->
-
-                  </div>
-                  <!--/.Card-->
-                  
-              </div>
-              <div class="col-lg-2"></div>
+              <div class="col-lg-3"></div>
               
           </div>
           <h1 class="font-bold py-5 mb-3">SOCIAL</h1>     
           <h5>Do you want to hear more about the project?</h5>          
-          <a target="_blank" href="https://mdbootstrap.com/material-design-for-bootstrap/" class="btn btn-blue waves-effect waves-light" rel="nofollow">Join Telegram</a>
-          <a target="_blank" href="https://mdbootstrap.com/material-design-for-bootstrap/" class="btn btn-blue waves-effect waves-light" rel="nofollow">Follow us in Twitter</a>
+          <a target="_blank" href="https://t.me/t3chcoin" class="btn btn-blue waves-effect waves-light" rel="nofollow">Join Telegram</a>
+          <a target="_blank" href="https://twitter.com/t3chcoin" class="btn btn-blue waves-effect waves-light" rel="nofollow">Follow us on Twitter</a>
           
         </div>
     </main>
-    <footer class="page-footer center-on-small-only indigo mt-5">
+    <footer class="page-footer center-on-small-only blue mt-5">
 
         <!--Footer Links-->
         <div class="container-fluid pr-0 pl-0">
 
             <!--Call to action-->
             <div class="call-to-action">
-                <h4 class="mb-5">Thanks for your support</h4>
-                
+                <h4 class="mb-5">Thanks for your interest</h4>
             </div>
             <div class="footer-copyright">
                 <div class="container-fluid">
