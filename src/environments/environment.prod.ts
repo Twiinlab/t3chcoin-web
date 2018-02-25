@@ -15,7 +15,7 @@
  */
 export const environment = {
   production: true,
-  apiUrl: 'http://127.0.0.1:8180/api',
+  apiUrl: 'https://t3chcoinfest.appspot.com/api',
   firebase: {
     // ***********************************************************************************************************************
     // * TODO(DEVELOPER): Update values according to: Firebase Console > Overview > Add Firebase to your web app. *

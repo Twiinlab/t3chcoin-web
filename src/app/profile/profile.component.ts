@@ -25,8 +25,8 @@ export class ProfileComponent {
   messages: FirebaseListObservable<any>;
   profilePicStyles: {};
 
-  currenUserProfile: any;
-  currenSocialProfile: any;
+  currentUserProfile: any;
+  currentSocialProfile: any;
   itemsCatalog: any;
 
   avatars: Array<any> = [];
@@ -118,9 +118,9 @@ export class ProfileComponent {
 
   buyItem(itemId) {
     const self = this;
-    this.t3chcoinService.buyItem(this.currenUserProfile.userId, itemId)
+    this.t3chcoinService.buyItem(this.currentUserProfile.userId, itemId)
     .subscribe(result => {
-        self.getUserProfile(this.currenUserProfile.userId);
+        self.getUserProfile(this.currentUserProfile.userId);
       },
       err => {
         self.showMessage('Sorry, You don´t have enough tokens', 'Let´s Twits');
@@ -128,33 +128,33 @@ export class ProfileComponent {
   }
 
   changeSelectedItem(item) {
-    this.currenUserProfile.selectedItem = item.itemId;
+    this.currentUserProfile.selectedItem = item.itemId;
     this.updateUser();
   }
 
   updateUser() {
     const self = this;
     this.t3chcoinService.updateUser(
-      self.currenUserProfile.userId,
-      self.currenUserProfile.userName,
-      self.currenUserProfile.avatar,
-      self.currenUserProfile.selectedItem)
+      self.currentUserProfile.userId,
+      self.currentUserProfile.userName,
+      self.currentUserProfile.avatar,
+      self.currentUserProfile.selectedItem)
     .subscribe(result => {
-      self.getUserProfile(this.currenUserProfile.userId);
+      self.getUserProfile(this.currentUserProfile.userId);
     });
   }
 
   changeHobbie(event) {
     console.log(event);
     this.groupHobbieInit = event.value;
-    this.currenUserProfile.avatar = this.groupSexInit + event.value;
+    this.currentUserProfile.avatar = this.groupSexInit + event.value;
     this.updateUser();
   }
 
   changeSex(event) {
     console.log(event);
     this.groupSexInit = event.value;
-    this.currenUserProfile.avatar = event.value + this.groupHobbieInit;
+    this.currentUserProfile.avatar = event.value + this.groupHobbieInit;
     this.updateUser();
   }
 
@@ -175,7 +175,7 @@ export class ProfileComponent {
   }
 
   fillUserProfile(userProfile) {
-    this.currenUserProfile = userProfile;
+    this.currentUserProfile = userProfile;
     this.updateAvatar(userProfile.avatar);
   }
 
@@ -186,7 +186,7 @@ export class ProfileComponent {
   }
 
   fillSocialProfile(socialProfile) {
-    this.currenSocialProfile = socialProfile;
+    this.currentSocialProfile = socialProfile;
   }
 
   getSrcAvatar(selectedAvatar) {
@@ -199,7 +199,7 @@ export class ProfileComponent {
   }
 
   checkContainsItem(itemId) {
-    return this.currenUserProfile && (this.currenUserProfile.items.indexOf(itemId) === -1);
+    return this.currentUserProfile && (this.currentUserProfile.items.indexOf(itemId) === -1);
   }
 
   login() {
@@ -208,6 +208,8 @@ export class ProfileComponent {
 
   logout() {
     this.afAuth.auth.signOut();
+    this.currentUser = null;
+    this.currentUserProfile = null;
   }
 
   // Returns true if user is signed-in. Otherwise false and displays a message.

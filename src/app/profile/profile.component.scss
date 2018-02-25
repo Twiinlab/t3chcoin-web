@@ -1,4 +1,5 @@
   main, .messages-card {
+    margin-top: 80px;
     height: 100%;
     padding-bottom: 0;
   }
@@ -278,4 +279,8 @@
     top: 4vw;
     font-size: 4vw;
     left: 20%;
+  }
+
+  .profile-image {
+    width: 80%;
   }
