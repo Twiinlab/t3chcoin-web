@@ -32,26 +32,28 @@
               <table>
                   <tr class="message-container">
                     <th style="width:150px">Avatar</th>
-                    <th style="width:150px">Name</th>
-                    <th style="width:150px"> <i class="fa fa-bullhorn fa-2x"></i></th>
-                    <th style="width:150px"> <i class="fa fa-twitter fa-2x"></i></th>
-                    <th style="width:150px"> <i class="fa fa-retweet fa-2x"></i></th>
-                    <th style="width:150px"> <i class="fa fa-heart fa-2x" style="color: #f44336;"></i></th>
+                    <th style="width:150px">Sticker</th>
+                    <th style="width:250px">Name</th>
+                    <th style="width:100px"> <i class="fa fa-twitter fa-2x"></i></th>
+                    <th style="width:100px"> <i class="fa fa-retweet fa-2x"></i></th>
+                    <th style="width:100px"> <i class="fa fa-heart fa-2x" style="color: #f44336;"></i></th>
+                    <th style="width:100px"> <img src="./assets/images/token-orange.png" style="height: 2.1em;" alt=""> </th>                    
                   </tr>
-                  <tr class="message-container" *ngFor="let message of socialMessages">
-                    <td style="width:150px" *ngFor="let col of tableSocialColumns">
-                        <div *ngIf="col === 'photoUrl'">
-                          <div class="pic" [style.background-image]="'url(' + message.photoUrl + ')'"></div>
-                        </div>
-                        <div *ngIf="col !== 'photoUrl'">
-                          {{message[col]}}
-                        </div>
-                    </td>
-                  </tr>
+                  <div *ngFor="let message of socialMessages">
+                    <tr class="message-container" >
+                      <td style="width:150px"><img class="img-avatar" [src]="getSrcAvatar(message.avatar)"> </td>
+                      <td style="width:150px"><img class="img-sticker" [src]="getSrcSticker(message.selectedItem)"></td>
+                      <td style="width:250px"><span class="cell-text">{{message.userName || '#anonymous'}}</span></td>
+                      <td style="width:100px"><span class="cell-text">{{message.totalTwit}}</span></td>
+                      <td style="width:100px"><span class="cell-text">{{message.totalTwitRetweet}}</span></td>
+                      <td style="width:100px"><span class="cell-text">{{message.totalTwitLike}}</span></td>
+                      <td style="width:100px"><span class="cell-text">{{message.balance}}</span></td>                      
+                    </tr>
+                  </div>
                 </table>
             </div>
           </mat-tab>
-          <mat-tab label="Top Users">
+          <!-- <mat-tab label="Top Users">
               <div class="demo-tab-content">
                   <table>
                       <tr class="message-container">
@@ -73,8 +75,8 @@
                       </tr>
                     </table>
               </div>
-            </mat-tab>
-        </mat-tab-group>
+            </mat-tab>-->
+        </mat-tab-group> 
       </mat-card-content>
     </mat-card>
   </div>

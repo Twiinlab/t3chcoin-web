@@ -42,7 +42,7 @@
         <div *ngIf="currentUserProfile" class="messages-card-container mdl-cell mdl-cell--12-col mdl-grid">
           <div fxLayout="row" style="width:100%;">
               <div fxFlex="30" style="padding:30px;" fxLayout="column">
-                <div mat-card-image class="avatar-image" *ngIf="currentUserProfile" [style.background-image]="'url(' + getSrcAvatar(groupHobbieInit) + ')'">
+                <div mat-card-image class="avatar-image" *ngIf="currentUserProfile" [style.background-image]="'url(' + getSrcAvatar(groupHobbieInit, groupSexInit) + ')'">
                   <img class="avatar-sticker" fxFlexAlign="end" [src]="getSrcSticker(currentUserProfile.selectedItem)">
                 </div>
               </div>
@@ -59,10 +59,10 @@
                               <h3><b>Avatar</b></h3>
                               <mat-button-toggle-group (change)="changeSex($event)" [value]="groupSexInit">
                                   <mat-button-toggle value="0">
-                                      <i class="fa fa-male fa-2x profile-icon"></i>
+                                      <i class="fa fa-female fa-2x profile-icon"></i>
                                   </mat-button-toggle>
                                   <mat-button-toggle value="1">
-                                      <i class="fa fa-female fa-2x profile-icon"></i>   
+                                      <i class="fa fa-male fa-2x profile-icon"></i>   
                                   </mat-button-toggle>
                               </mat-button-toggle-group>
                             </div>

@@ -22,6 +22,13 @@ export class T3chcoinService {
       .catch(this.handleError);
   }
 
+  getTopFillSocials(): Observable<any> {
+    return this.http
+      .get(`${environment.apiUrl}/social/full`)
+      .map(res => this.extractData(res))
+      .catch(this.handleError);
+  }
+
   getSocial(socialId: string): Observable<any> {
     return this.http
       .get(`${environment.apiUrl}/social/${socialId}`)

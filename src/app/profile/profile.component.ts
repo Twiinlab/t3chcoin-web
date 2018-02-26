@@ -62,7 +62,7 @@ export class ProfileComponent {
       this.stickers.push({ src: './assets/stickers/sticker' + i + '.png'});
     }
     for (let i = 1; i < 5; i++) {
-      this.avatars.push({ src: './assets/avatars/avatar' + i + '.png'});
+      this.avatars.push(['./assets/avatars/girl' + i + '.png', './assets/avatars/boy' + i + '.png']);
     }
   }
 
@@ -189,8 +189,8 @@ export class ProfileComponent {
     this.currentSocialProfile = socialProfile;
   }
 
-  getSrcAvatar(selectedAvatar) {
-    return (this.avatars[selectedAvatar].src) ? this.avatars[selectedAvatar].src : './assets/avatars/avatar1.png';
+  getSrcAvatar(selectedAvatar, selectedSexInit) {
+    return (this.avatars[selectedAvatar][selectedSexInit]) ? this.avatars[selectedAvatar][selectedSexInit] : this.avatars[0][0];
   }
 
   getSrcSticker(selectedItem) {

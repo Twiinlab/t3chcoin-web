@@ -10,31 +10,37 @@ const PROFILE_PLACEHOLDER_IMAGE_URL = '/assets/images/profile_placeholder.png';
 })
 export class HallComponent implements OnInit {
 
-  socialMessages: any;
-  tableSocialColumns = ['photoUrl', 'socialId', 'totalAll', 'totalTwit', 'totalTwitRetweet', 'totalTwitLike'];
-
   userMessages: any;
+  socialMessages: any;
+  itemsCatalog: Array<any> = [];
+  avatars: Array<any> = [];
+  stickers: Array<any> = [];
+  tableSocialColumns = ['avatar', 'selectedItem', 'userName', 'totalTwit', 'totalTwitRetweet', 'totalTwitLike', 'balance'];
   tableUserColumns = ['avatar', 'selectedItem', 'userName', 'itemsCount', 'balance'];
 
   constructor(public t3chcoinService: T3chcoinService) { }
 
   ngOnInit() {
+    this.initAssets();
+    this.initCatalog();
     this.initSocialMessage();
-    this.initUserMessage()
+    // this.initUserMessage()
   }
 
   initSocialMessage() {
+    const self = this;
     this.t3chcoinService
-    .getTopSocials()
+    .getTopFillSocials()
     .subscribe(socials => {
-      this.socialMessages = socials.map(item => {
+      this.socialMessages = socials.map(social => {
         return {
-          photoUrl: PROFILE_PLACEHOLDER_IMAGE_URL,
-          socialId: item.socialId || '#UserName',
-          totalAll: item.totalAll,
-          totalTwit: item.totalTwit,
-          totalTwitLike: item.totalTwit,
-          totalTwitRetweet: item.totalTwitRetweet
+        avatar: social.user.avatar,
+        selectedItem: social.user.selectedItem,
+        userName: social.user.userName,
+        balance: social.user.balance,
+        totalTwit: social.totalTwit,
+        totalTwitLike: social.totalTwitLike,
+        totalTwitRetweet: social.totalTwitRetweet
         }
       });
     });
@@ -55,4 +61,43 @@ export class HallComponent implements OnInit {
       });
     });
   }
+
+  initAssets() {
+    for (let i = 1; i < 21; i++) {
+      this.stickers.push({ src: './assets/stickers/sticker' + i + '.png'});
+    }
+    for (let i = 1; i < 5; i++) {
+      this.avatars.push(['./assets/avatars/girl-simple' + i + '.png', './assets/avatars/boy-simple' + i + '.png']);
+    }
+  }
+
+  initCatalog() {
+    const self = this;
+    self.t3chcoinService.getItemsCatalog()
+        .subscribe(catalog => {
+          self.itemsCatalog = catalog.map(item => {
+            item.src = (self.stickers[(item.itemId % self.stickers.length)]).src;
+            return item;
+          });
+        });
+  }
+
+  getSrcAvatar(originAvatar) {
+    const avatar = this.convertAvatar(originAvatar);
+    return (this.avatars[avatar.hobbie][avatar.sex]) ? this.avatars[avatar.hobbie][avatar.sex] : this.avatars[0][0];
+  }
+
+  getSrcSticker(selectedItem) {
+    const selected = this.itemsCatalog.filter(item => item.itemId === selectedItem);
+    return (selected.length > 0 ? selected[0].src : './assets/stickers/sticker0.png');
+  }
+
+  convertAvatar(avatar) {
+    const avatarInt = !isNaN(parseInt(avatar, 10)) ? parseInt(avatar, 10) : 0;
+    return {
+      hobbie: (avatarInt % 10) % 4,
+      sex:  (Math.round(avatarInt / 10) > 0) ? 1 : 0
+    };
+  }
+
 }
